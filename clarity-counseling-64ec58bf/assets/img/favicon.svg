@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Clarity Counseling &amp; Training Centre">
+  <title>Clarity Counseling &amp; Training Centre</title>
+  <!-- Three figures held together, after the colours of the Clarity logo -->
+  <circle cx="17" cy="12" r="6" fill="#2b9fd9"/>
+  <circle cx="33" cy="8" r="6" fill="#86c9e8"/>
+  <circle cx="49" cy="14" r="6" fill="#e3a23b"/>
+  <path d="M8 26c4-6 14-7 20-2 5 4 6 13 3 22-3 9-10 14-16 13-6-1-7-8-6-14 1-7-6-12-1-19z" fill="#2b9fd9" opacity=".92"/>
+  <path d="M22 20c6-5 17-5 21 2 4 6 1 14-2 21-3 7-6 14-12 15-6 1-9-6-9-13 0-8-4-19 2-25z" fill="#1f7fb4" opacity=".85"/>
+  <path d="M40 24c6-3 15 0 16 8 1 8-5 12-9 18-4 7-8 12-14 11-5-1-5-7-3-12 3-8 3-21 10-25z" fill="#e3a23b" opacity=".9"/>
+  <path d="M30 34c5-4 12-2 13 4 1 6-3 11-7 16-4 4-9 7-12 4-3-4 0-9 1-13 1-4 1-8 5-11z" fill="#5f7a2e" opacity=".95"/>
+</svg>
