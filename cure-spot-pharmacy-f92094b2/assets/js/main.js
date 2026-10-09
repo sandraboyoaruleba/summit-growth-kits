@@ -1,105 +1,101 @@
-/* Vanilla JS — no dependencies. Content stays visible if this file fails to load. */
+/* Cure Spot Pharmacy: small site scripts, no dependencies. Loaded at the end of <body>. */
 (function () {
   'use strict';
   var root = document.documentElement;
   root.classList.add('js');
 
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   // Current year
-  document.querySelectorAll('[data-year]').forEach(function (el) {
-    el.textContent = new Date().getFullYear();
-  });
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // Sticky header state
+  // Header shadow on scroll
   var header = document.querySelector('.site-header');
-  function onScroll() {
-    if (header) header.classList.toggle('is-scrolled', window.scrollY > 24);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
   onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   // Mobile menu
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    if (!toggle) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      document.body.classList.toggle('nav-open', !open);
-    });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('nav-open');
-      });
-    });
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('nav-open');
-        toggle.focus();
-      }
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
     });
   }
 
-  // Scroll reveal
-  var items = document.querySelectorAll('.reveal');
-  if (!reduce && 'IntersectionObserver' in window) {
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
     items.forEach(function (el) { io.observe(el); });
-  } else {
-    items.forEach(function (el) { el.classList.add('is-visible'); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
   }
 
-  // Tabs (menus / programmes)
-  document.querySelectorAll('[data-tabs]').forEach(function (group) {
-    var tabs = group.querySelectorAll('[role="tab"]');
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        tabs.forEach(function (t) {
-          var sel = t === tab;
-          t.setAttribute('aria-selected', String(sel));
-          t.tabIndex = sel ? 0 : -1;
-          var panel = document.getElementById(t.getAttribute('aria-controls'));
-          if (panel) panel.hidden = !sel;
-        });
-      });
-      tab.addEventListener('keydown', function (e) {
-        var list = Array.prototype.slice.call(tabs);
-        var i = list.indexOf(tab);
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-          e.preventDefault();
-          var next = list[(i + (e.key === 'ArrowRight' ? 1 : -1) + list.length) % list.length];
-          next.focus(); next.click();
-        }
-      });
-    });
-  });
+  // Pause background videos for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
 
-  // WhatsApp enquiry forms: build a prefilled wa.me message (no backend)
-  document.querySelectorAll('form[data-wa]').forEach(function (form) {
+  // Enquiry form -> WhatsApp message with the details typed in.
+  // Every field with data-label becomes a line; ticked checkboxes sharing a data-label are joined.
+  var form = document.getElementById('enquiry-form');
+  if (form) {
+    var params = new URLSearchParams(window.location.search);
+    ['service', 'type', 'sector'].forEach(function (key) {
+      var v = params.get(key); if (!v) return;
+      var sel = form.querySelector('select[name="' + key + '"]');
+      if (sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === v) { sel.selectedIndex = i; break; } } }
+      var radio = form.querySelector('input[type="radio"][name="' + key + '"][value="' + v + '"]');
+      if (radio) radio.checked = true;
+    });
+    var cats = params.get('cat');
+    if (cats) cats.split(',').forEach(function (c) {
+      var box = form.querySelector('input[type="checkbox"][value="' + c + '"]'); if (box) box.checked = true;
+    });
+
+    function message() {
+      var lines = [form.getAttribute('data-intro'), ''];
+      var groups = {}; var order = [];
+      [].slice.call(form.querySelectorAll('[data-label]')).forEach(function (el) {
+        var label = el.getAttribute('data-label'); var val = '';
+        if (el.type === 'checkbox' || el.type === 'radio') { if (!el.checked) return; val = el.value; }
+        else if (el.tagName === 'SELECT') { val = el.selectedIndex >= 0 && el.value ? el.options[el.selectedIndex].text : ''; }
+        else { val = String(el.value || '').trim(); }
+        if (!val) return;
+        if (!(label in groups)) { groups[label] = []; order.push(label); }
+        groups[label].push(val);
+      });
+      order.forEach(function (label) {
+        var v = groups[label].join(', ');
+        if (v.indexOf('\n') > -1) lines.push(label + ':', v); else lines.push(label + ': ' + v);
+      });
+      return lines.join('\n');
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      var number = form.getAttribute('data-wa');
-      var intro = form.getAttribute('data-intro') || 'Hello!';
-      var lines = [intro, ''];
-      form.querySelectorAll('input, select, textarea').forEach(function (field) {
-        if (!field.name || !field.value.trim()) return;
-        if ((field.type === 'radio' || field.type === 'checkbox') && !field.checked) return;
-        var label = field.getAttribute('data-label') || field.name;
-        lines.push('*' + label + ':* ' + field.value.trim());
-      });
-      var url = 'https://wa.me/' + number + '?text=' + encodeURIComponent(lines.join('\n'));
-      window.open(url, '_blank', 'noopener');
+      var url = 'https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(message());
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) window.location.href = url;
     });
-  });
+  }
+
 })();

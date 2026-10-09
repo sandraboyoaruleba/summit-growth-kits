@@ -1,16 +1,15 @@
-/* Baraka Shoes Shop – site behaviour (vanilla JS) */
+/* Baraka Shoes Shop: site behaviour (vanilla JS, no dependencies). Loaded at the end of <body>. */
 (function () {
   'use strict';
   var WA = '254722248796';
   var waLink = function (text) { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text); };
 
   document.documentElement.classList.add('js');
-  var y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   // header state
   var header = document.querySelector('.site-header');
-  var onScroll = function () { header && header.classList.toggle('scrolled', window.scrollY > 10); };
+  var onScroll = function () { if (header) header.classList.toggle('scrolled', window.scrollY > 10); };
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // mobile nav
@@ -26,72 +25,111 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setNav(false); });
   }
 
-  // reveal
-  var items = document.querySelectorAll('.reveal');
+  // reveal: content is visible without JS; only hidden under .js .reveal
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!('IntersectionObserver' in window) || reduce) {
     items.forEach(function (el) { el.classList.add('is-visible'); });
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-    items.forEach(function (el, i) { el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+    }, { threshold: 0.01, rootMargin: '0px 0px -5% 0px' });
+    items.forEach(function (el, i) { el.style.transitionDelay = (i % 4) * 60 + 'ms'; io.observe(el); });
+    // safety net: anything above the bottom of the screen shows (e.g. after a jump or a layout shift)
+    var sweep = function () {
+      var h = window.innerHeight;
+      items.forEach(function (el) { if (!el.classList.contains('is-visible') && el.getBoundingClientRect().top < h) el.classList.add('is-visible'); });
+    };
+    var t = null;
+    window.addEventListener('scroll', function () { if (!t) t = setTimeout(function () { t = null; sweep(); }, 200); }, { passive: true });
+    window.addEventListener('load', sweep);
+  }
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  // product filters (shop page); #men, #women, #kids, #sport pre-select a filter
+  var chips = document.querySelectorAll('.chip[data-filter]');
+  var products = document.querySelectorAll('.product');
+  function applyFilter(f) {
+    var hit = false;
+    chips.forEach(function (c) { var on = c.getAttribute('data-filter') === f; if (on) hit = true; c.classList.toggle('active', on); c.setAttribute('aria-pressed', String(on)); });
+    if (!hit) return;
+    products.forEach(function (p) {
+      var show = f === 'all' || (' ' + p.getAttribute('data-cat') + ' ').indexOf(' ' + f + ' ') > -1;
+      p.classList.toggle('hidden', !show);
+      if (show) p.classList.add('is-visible');
+    });
+  }
+  chips.forEach(function (chip) { chip.addEventListener('click', function () { applyFilter(chip.getAttribute('data-filter')); }); });
+  if (chips.length && location.hash) {
+    var h = location.hash.slice(1);
+    applyFilter(h);
   }
 
-  // product filters
-  var chips = document.querySelectorAll('.chip');
-  var products = document.querySelectorAll('.product');
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      var f = chip.getAttribute('data-filter');
-      chips.forEach(function (c) { var on = c === chip; c.classList.toggle('active', on); c.setAttribute('aria-pressed', String(on)); });
-      products.forEach(function (p) {
-        var show = f === 'all' || (' ' + p.getAttribute('data-cat') + ' ').indexOf(' ' + f + ' ') > -1;
-        p.classList.toggle('hidden', !show);
-        if (show) p.classList.add('is-visible');
-      });
-    });
-  });
-
-  // product order buttons -> WhatsApp
-  document.querySelectorAll('.p-btn').forEach(function (btn) {
+  // product order buttons -> WhatsApp with product name and price
+  document.querySelectorAll('.p-btn[data-product]').forEach(function (btn) {
     var name = btn.getAttribute('data-product');
-    var priceEl = btn.parentNode.querySelector('.price');
+    var card = btn.closest('.product');
+    var priceEl = card ? card.querySelector('.price .kes') : null;
     var price = priceEl ? ' (' + priceEl.textContent.replace(/\s+/g, ' ').trim() + ')' : '';
     btn.href = waLink('Hello Baraka Shoes, I am interested in the ' + name + price + '. Do you have my size? My size is: ');
     btn.target = '_blank'; btn.rel = 'noopener';
     btn.setAttribute('aria-label', 'Order ' + name + ' on WhatsApp');
   });
 
-  // size select depends on who
-  var sizeSel = document.getElementById('sizeSel');
-  var form = document.getElementById('finderForm');
-  var fillSizes = function (who) {
-    if (!sizeSel) return;
-    var range = who === 'Kids' ? [20, 38] : who === 'Women' ? [35, 43] : [38, 47];
-    var html = '<option>Not sure</option>';
-    for (var s = range[0]; s <= range[1]; s++) html += '<option' + (s === (who === 'Kids' ? 30 : who === 'Women' ? 38 : 42) ? ' selected' : '') + '>' + s + '</option>';
-    sizeSel.innerHTML = html;
-  };
+  // order / find-my-pair form -> WhatsApp
+  var form = document.getElementById('orderForm');
   if (form) {
-    fillSizes('Men');
+    var sizeSel = form.querySelector('#f-size');
+    var fillSizes = function (who) {
+      if (!sizeSel) return;
+      var range = who === 'Kids' ? [20, 38] : who === 'Women' ? [35, 43] : [38, 47];
+      var def = who === 'Kids' ? 30 : who === 'Women' ? 38 : 42;
+      var html = '<option>Not sure</option>';
+      for (var s = range[0]; s <= range[1]; s++) html += '<option' + (s === def ? ' selected' : '') + '>' + s + '</option>';
+      sizeSel.innerHTML = html;
+    };
+    var who0 = form.querySelector('input[name="who"]:checked');
+    fillSizes(who0 ? who0.value : 'Men');
     form.querySelectorAll('input[name="who"]').forEach(function (r) { r.addEventListener('change', function () { fillSizes(r.value); }); });
+
+    // ?product=school-shoes (or any option value) pre-selects the style
+    var params = new URLSearchParams(window.location.search);
+    var pre = params.get('product') || params.get('service');
+    var sel = form.querySelector('#f-product');
+    if (pre && sel) {
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === pre) {
+          sel.selectedIndex = i;
+          var w = sel.options[i].getAttribute('data-who');
+          if (w) { var r = form.querySelector('input[name="who"][value="' + w + '"]'); if (r) { r.checked = true; fillSizes(w); } }
+          break;
+        }
+      }
+    }
+    var val = function (n) { var el = form.elements[n]; return el && el.value ? String(el.value).trim() : ''; };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var who = form.querySelector('input[name="who"]:checked').value;
-      var el = form.elements;
-      var msg = [
-        'Hello Baraka Shoes!' + (el.name.value.trim() ? ' This is ' + el.name.value.trim() + '.' : ''),
-        "I'm looking for:",
-        '- For: ' + who,
-        '- Style: ' + el.style.value,
-        '- Size (EU): ' + el.size.value,
-        el.colour.value.trim() ? '- Colour: ' + el.colour.value.trim() : '',
-        '- Budget: ' + el.budget.value.replace('–', '-'),
+      if (!form.reportValidity()) return;
+      var who = form.querySelector('input[name="who"]:checked');
+      var product = sel && sel.selectedIndex > 0 ? sel.options[sel.selectedIndex].text : '';
+      var get = form.querySelector('input[name="get"]:checked');
+      var lines = [
+        'Hello Baraka Shoes! I found you on your website.',
         '',
-        'Please send me photos of what you have. Thank you!'
-      ].filter(function (l, i) { return l !== '' || i === 7; }).join('\n');
-      window.open(waLink(msg), '_blank', 'noopener');
+        'Name: ' + val('name'),
+        'Phone: ' + val('phone'),
+        'Looking for: ' + (product || 'Please advise'),
+        'For: ' + (who ? who.value : ''),
+        'Size (EU): ' + val('size')
+      ];
+      if (val('colour')) lines.push('Colour: ' + val('colour'));
+      if (val('budget')) lines.push('Budget: ' + val('budget').replace(/–/g, '-'));
+      if (get) lines.push('I would like to: ' + get.value);
+      if (val('message')) lines.push('', val('message'));
+      lines.push('', 'Please send me photos of what you have. Thank you!');
+      var url = waLink(lines.join('\n'));
+      var win = window.open(url, '_blank', 'noopener');
+      if (!win) window.location.href = url;
     });
   }
 })();

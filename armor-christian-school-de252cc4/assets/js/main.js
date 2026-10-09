@@ -1,97 +1,90 @@
-/* Vanilla JS: nav, reveal, WhatsApp enquiry form, menu tabs, year */
+/* Armor Christian School: small site scripts, no dependencies. Loaded at the end of <body>. */
 (function () {
+  'use strict';
+  var WHATSAPP = '';
   var root = document.documentElement;
   root.classList.add('js');
 
-  // Current year
-  document.querySelectorAll('[data-year]').forEach(function (el) {
-    el.textContent = new Date().getFullYear();
-  });
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // Sticky header state
+  // Header shadow + header height for the mobile menu
   var header = document.querySelector('.site-header');
-  function onScroll() {
-    if (header) header.classList.toggle('is-scrolled', window.scrollY > 24);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
+  function setH() { if (header) root.style.setProperty('--hdr-h', header.getBoundingClientRect().bottom + 'px'); }
+  onScroll(); setH();
+  window.addEventListener('scroll', function () { onScroll(); }, { passive: true });
+  window.addEventListener('resize', setH);
 
-  // Mobile nav
+  // Mobile menu
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    if (!toggle) return;
+    setH();
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      document.body.classList.toggle('nav-open', !open);
-    });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('nav-open');
-      });
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
     });
   }
 
-  // Scroll reveal
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
-  if (!reduce && 'IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    items.forEach(function (el) { io.observe(el); });
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
   } else {
-    items.forEach(function (el) { el.classList.add('is-visible'); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
   }
 
-  // Menu tabs (if present)
-  var tabs = document.querySelectorAll('[role="tab"]');
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      var list = tab.closest('[role="tablist"]');
-      list.querySelectorAll('[role="tab"]').forEach(function (t) {
-        t.setAttribute('aria-selected', 'false');
-        t.tabIndex = -1;
-        var p = document.getElementById(t.getAttribute('aria-controls'));
-        if (p) p.hidden = true;
-      });
-      tab.setAttribute('aria-selected', 'true');
-      tab.tabIndex = 0;
-      var panel = document.getElementById(tab.getAttribute('aria-controls'));
-      if (panel) panel.hidden = false;
-    });
-    tab.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      var all = Array.prototype.slice.call(tab.closest('[role="tablist"]').querySelectorAll('[role="tab"]'));
-      var i = all.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : -1);
-      var next = all[(i + all.length) % all.length];
-      next.focus();
-      next.click();
-    });
-  });
+  // Pause background videos for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
 
-  // WhatsApp enquiry form: builds a prefilled wa.me message (no backend)
-  document.querySelectorAll('form[data-wa], form[data-mailto]').forEach(function (form) {
+  // Enquiry form -> WhatsApp (or email when no number is confirmed yet), with the details typed in
+  var form = document.getElementById('enquiry-form');
+  if (form) {
+    var select = form.querySelector('#f-service');
+    var params = new URLSearchParams(window.location.search);
+    var preset = params.get('service');
+    if (preset && select) {
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === preset) { select.selectedIndex = i; break; }
+      }
+    }
+    function message() {
+      var lines = [form.getAttribute('data-intro') || 'Hello!', ''];
+      [].slice.call(form.querySelectorAll('[data-label]')).forEach(function (el) {
+        var v = '';
+        if (el.tagName === 'SELECT') v = el.selectedIndex > 0 ? el.options[el.selectedIndex].text : '';
+        else if (el.type === 'radio') { if (!el.checked) return; v = el.value; }
+        else v = String(el.value || '').trim();
+        if (v) lines.push(el.getAttribute('data-label') + ': ' + v);
+      });
+      return lines.join('\n');
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      var lines = [form.getAttribute('data-wa-intro') || 'Hello!'];
-      form.querySelectorAll('input, select, textarea').forEach(function (f) {
-        if (!f.name || !f.value.trim()) return;
-        var label = form.querySelector('label[for="' + f.id + '"]');
-        lines.push((label ? label.textContent.replace(/\s*\*$/, '').trim() : f.name) + ': ' + f.value.trim());
-      });
-      if (form.hasAttribute('data-wa')) {
-        window.open('https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
-      } else {
-        window.location.href = 'mailto:' + form.getAttribute('data-mailto') + '?subject=' + encodeURIComponent(form.getAttribute('data-subject') || 'Website enquiry') + '&body=' + encodeURIComponent(lines.join('\n'));
-      }
+      var mail = form.getAttribute('data-mailto');
+      var url;
+      if (WHATSAPP) url = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message());
+      else url = 'mailto:' + mail + '?subject=' + encodeURIComponent(form.getAttribute('data-subject') || 'Enquiry') + '&body=' + encodeURIComponent(message());
+      if (WHATSAPP) { var w = window.open(url, '_blank', 'noopener'); if (!w) window.location.href = url; }
+      else window.location.href = url;
     });
-  });
+  }
 })();

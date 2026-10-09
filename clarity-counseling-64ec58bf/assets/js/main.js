@@ -1,78 +1,100 @@
-/* Clarity Counseling & Training Centre: site behaviour (vanilla JS, no dependencies) */
+/* Clarity Counseling & Training Centre: site behaviour (vanilla JS, no dependencies). Loaded at the end of <body>. */
 (function () {
   'use strict';
+  var WHATSAPP = '254114444300';
   var root = document.documentElement;
   root.classList.add('js');
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Current year
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // Sticky header shadow
+  // Header shadow on scroll
   var header = document.querySelector('.site-header');
-  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 24); }
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 12); }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Mobile navigation
+  // Mobile menu
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
-  function setNav(open) {
+  function setMenu(open) {
+    if (!toggle) return;
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     document.body.classList.toggle('nav-open', open);
   }
   if (toggle && nav) {
-    toggle.addEventListener('click', function () { setNav(toggle.getAttribute('aria-expanded') !== 'true'); });
-    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setNav(false); }); });
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setNav(false); toggle.focus(); }
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
     });
   }
 
-  // Scroll reveal
-  var reveals = document.querySelectorAll('.reveal');
-  if (!reduceMotion && 'IntersectionObserver' in window) {
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-    reveals.forEach(function (el) { io.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add('is-visible'); });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
   }
 
-  // "Book" buttons pre-select the service (and format) in the booking form
-  var typeSelect = document.getElementById('f-type');
-  document.querySelectorAll('[data-pick]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      if (typeSelect) {
-        var want = btn.getAttribute('data-pick');
-        Array.prototype.forEach.call(typeSelect.options, function (o) { if (o.text === want) typeSelect.value = o.value || o.text; });
-      }
-      var fmt = btn.getAttribute('data-format');
-      if (fmt) {
-        document.querySelectorAll('input[name="format"]').forEach(function (r) { r.checked = r.value.indexOf(fmt) === 0; });
-      }
-    });
-  });
+  // Background videos stay still for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
 
-  // Booking form: builds a prefilled WhatsApp message (no backend, nothing stored)
-  document.querySelectorAll('form[data-wa]').forEach(function (form) {
+  // Booking form -> WhatsApp message with the details typed in (nothing is stored)
+  var form = document.getElementById('enquiry-form');
+  if (form) {
+    var select = form.querySelector('#f-service');
+    var params = new URLSearchParams(window.location.search);
+    var preset = params.get('service');
+    if (preset && select) {
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === preset) { select.selectedIndex = i; break; }
+      }
+    }
+    var fmt = params.get('format');
+    if (fmt) {
+      var r = form.querySelector('input[name="format"][value="' + fmt + '"]');
+      if (r) r.checked = true;
+    }
+    function val(name) { var el = form.elements[name]; return el && el.value ? String(el.value).trim() : ''; }
+    function message() {
+      var service = select && select.selectedIndex > 0 ? select.options[select.selectedIndex].text : '';
+      var format = form.querySelector('input[name="format"]:checked');
+      var lines = [
+        'Hello Clarity, I found you on your website and would like to book or ask about:',
+        '',
+        'Name: ' + val('name'),
+        'Phone: ' + val('phone'),
+        'Interested in: ' + service
+      ];
+      if (format) lines.push('Format: ' + format.parentNode.textContent.trim());
+      if (val('day')) lines.push('Preferred day: ' + val('day'));
+      if (val('time')) lines.push('Preferred time: ' + val('time'));
+      if (val('where')) lines.push('I am based in: ' + val('where'));
+      if (val('message')) lines.push('', val('message'));
+      return lines.join('\n');
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      var lines = [form.getAttribute('data-intro') || 'Hello!'];
-      form.querySelectorAll('[name]').forEach(function (field) {
-        if (!field.getAttribute('data-label')) return;
-        if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
-        var val = (field.value || '').trim();
-        if (!val) return;
-        lines.push('• ' + field.getAttribute('data-label') + ': ' + val);
-      });
-      var url = 'https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(lines.join('\n'));
-      window.open(url, '_blank', 'noopener');
+      if (!form.reportValidity()) return;
+      var url = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message());
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) window.location.href = url;
     });
-  });
+  }
 })();

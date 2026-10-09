@@ -1,70 +1,108 @@
+/* Small site scripts, no dependencies. Loaded at the end of <body>. */
 (function () {
   'use strict';
-  var WA = '256788403753';
+  var root = document.documentElement;
+  root.classList.add('js');
 
-  // Year
-  var y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
+  // Current year
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   // Header shadow on scroll
   var header = document.querySelector('.site-header');
-  function onScroll() { if (header) header.classList.toggle('scrolled', window.scrollY > 10); }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
   onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   // Mobile menu
-  var burger = document.querySelector('.burger');
-  var nav = document.getElementById('nav');
-  if (burger && nav) {
-    burger.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    if (!toggle) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
     });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        nav.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        burger.setAttribute('aria-label', 'Open menu');
-      });
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
     });
   }
 
-  // Scroll reveal
-  var els = document.querySelectorAll('.reveal');
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!('IntersectionObserver' in window) || reduce) {
-    els.forEach(function (el) { el.classList.add('is-visible'); });
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
   } else {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function (el) { io.observe(el); });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
   }
 
-  // Job form -> WhatsApp
-  var form = document.getElementById('jobForm');
+  // Pause background videos for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  // Enquiry form -> WhatsApp message with the details typed in.
+  // Any URL parameter that matches a field name pre-fills it (e.g. contact.html?service=printing).
+  var form = document.getElementById('enquiry-form');
   if (form) {
-    var d = form.elements.date;
-    if (d) d.min = new Date().toISOString().slice(0, 10);
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var f = form.elements, err = form.querySelector('.form-error');
-      var name = f.name.value.trim(), details = f.details.value.trim();
-      if (!name || !details) { err.hidden = false; return; }
-      err.hidden = true;
-      var svc = form.querySelector('input[name="service"]:checked');
-      var lines = [
-        'Hello Computer Science Centre,',
-        'Service: ' + (svc ? svc.value : ''),
-        'Job: ' + details,
-        'Name: ' + name
-      ];
-      if (f.date.value) lines.push('Needed by: ' + f.date.value);
-      lines.push('', 'I will attach my file(s) here. Please confirm the price and when it will be ready. Thank you!');
-      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    var params = new URLSearchParams(window.location.search);
+    params.forEach(function (value, key) {
+      var el = form.elements[key];
+      if (!el || !value) return;
+      if (el.tagName === 'SELECT') {
+        for (var i = 0; i < el.options.length; i++) {
+          var o = el.options[i];
+          if (o.value === value || o.text === value) { el.selectedIndex = i; break; }
+        }
+      } else if (el.length && el[0] && el[0].type === 'radio') {
+        [].forEach.call(el, function (r) { if (r.value === value) r.checked = true; });
+      } else if (el.type !== 'radio') {
+        el.value = value;
+      }
+    });
+
+    function fieldText(el) {
+      if (el.tagName === 'SELECT') return el.value ? el.options[el.selectedIndex].text : '';
+      return String(el.value || '').trim();
+    }
+    function message() {
+      var lines = [form.getAttribute('data-intro') || 'Hello! I found you on your website.', ''];
+      var seen = {};
+      form.querySelectorAll('[data-label]').forEach(function (el) {
+        var label = el.getAttribute('data-label');
+        if (el.type === 'radio') {
+          if (seen[el.name]) return;
+          seen[el.name] = true;
+          var c = form.querySelector('input[name="' + el.name + '"]:checked');
+          if (c) lines.push(label + ': ' + c.value);
+          return;
+        }
+        var v = fieldText(el);
+        if (!v) return;
+        if (el.tagName === 'TEXTAREA') lines.push('', v);
+        else lines.push(label + ': ' + v);
+      });
+      return lines.join('\n');
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var url = 'https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(message());
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) window.location.href = url;
     });
   }
 })();

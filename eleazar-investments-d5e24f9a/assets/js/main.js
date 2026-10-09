@@ -1,97 +1,91 @@
-/* Vanilla JS: nav, reveal, WhatsApp enquiry form, menu tabs, year */
+/* Shared site script: menu, reveal, forms. No dependencies. Loaded at the end of <body>. */
 (function () {
+  'use strict';
   var root = document.documentElement;
   root.classList.add('js');
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // Current year
-  document.querySelectorAll('[data-year]').forEach(function (el) {
-    el.textContent = new Date().getFullYear();
-  });
-
-  // Sticky header state
   var header = document.querySelector('.site-header');
-  function onScroll() {
-    if (header) header.classList.toggle('is-scrolled', window.scrollY > 24);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
   onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Mobile nav
+  // Mobile menu
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
+  function setOffset() { if (header) root.style.setProperty('--hdr-off', Math.max(0, header.getBoundingClientRect().bottom) + 'px'); }
+  function setMenu(open) {
+    if (!toggle) return;
+    setOffset();
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      document.body.classList.toggle('nav-open', !open);
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
     });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('nav-open');
-      });
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
     });
+    window.addEventListener('resize', function () { if (window.innerWidth > 1080) setMenu(false); });
   }
 
-  // Scroll reveal
+  // Reveal on scroll: content is visible without JS; it is only hidden under .js .reveal
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
-  if (!reduce && 'IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-    items.forEach(function (el) { io.observe(el); });
-  } else {
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)) {
     items.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-visible'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -5% 0px', threshold: 0.01 });
+    items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
   }
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
 
-  // Menu tabs (if present)
-  var tabs = document.querySelectorAll('[role="tab"]');
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      var list = tab.closest('[role="tablist"]');
-      list.querySelectorAll('[role="tab"]').forEach(function (t) {
-        t.setAttribute('aria-selected', 'false');
-        t.tabIndex = -1;
-        var p = document.getElementById(t.getAttribute('aria-controls'));
-        if (p) p.hidden = true;
-      });
-      tab.setAttribute('aria-selected', 'true');
-      tab.tabIndex = 0;
-      var panel = document.getElementById(tab.getAttribute('aria-controls'));
-      if (panel) panel.hidden = false;
+  // Enquiry form -> WhatsApp (or email when no number is set), details typed in
+  var form = document.getElementById('enquiry-form');
+  if (form) {
+    var params = new URLSearchParams(window.location.search);
+    params.forEach(function (value, key) {
+      var el = form.elements[key];
+      if (!el) return;
+      if (el.tagName === 'SELECT') {
+        for (var i = 0; i < el.options.length; i++) { if (el.options[i].value === value) { el.selectedIndex = i; break; } }
+      } else if (el.length && el[0] && el[0].type === 'checkbox') {
+        [].forEach.call(el, function (c) { if (c.value === value) c.checked = true; });
+      } else if (el.type !== 'checkbox' && el.type !== 'radio') {
+        el.value = value;
+      }
     });
-    tab.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      var all = Array.prototype.slice.call(tab.closest('[role="tablist"]').querySelectorAll('[role="tab"]'));
-      var i = all.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : -1);
-      var next = all[(i + all.length) % all.length];
-      next.focus();
-      next.click();
-    });
-  });
-
-  // WhatsApp enquiry form: builds a prefilled wa.me message (no backend)
-  document.querySelectorAll('form[data-wa], form[data-mailto]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      var lines = [form.getAttribute('data-wa-intro') || 'Hello!'];
-      form.querySelectorAll('input, select, textarea').forEach(function (f) {
-        if (!f.name || !f.value.trim()) return;
-        var label = form.querySelector('label[for="' + f.id + '"]');
-        lines.push((label ? label.textContent.replace(/\s*\*$/, '').trim() : f.name) + ': ' + f.value.trim());
+      var lines = [form.getAttribute('data-intro') || 'Hello!', ''];
+      [].forEach.call(form.querySelectorAll('[data-label]'), function (el) {
+        var label = el.getAttribute('data-label'), v = '';
+        if (el.tagName === 'FIELDSET') {
+          v = [].map.call(el.querySelectorAll('input:checked'), function (c) { return c.value; }).join(', ');
+        } else if (el.tagName === 'SELECT') {
+          v = el.selectedIndex > 0 || el.options[0].value ? el.options[el.selectedIndex].text : '';
+        } else { v = String(el.value || '').trim(); }
+        if (v) lines.push(label + ': ' + v);
       });
-      if (form.hasAttribute('data-wa')) {
-        window.open('https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
-      } else {
-        window.location.href = 'mailto:' + form.getAttribute('data-mailto') + '?subject=' + encodeURIComponent(form.getAttribute('data-subject') || 'Website enquiry') + '&body=' + encodeURIComponent(lines.join('\n'));
-      }
+      var text = lines.join('\n');
+      var wa = form.getAttribute('data-wa');
+      var url;
+      if (wa) url = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(text);
+      else url = 'mailto:' + form.getAttribute('data-email') + '?subject=' + encodeURIComponent(form.getAttribute('data-subject') || 'Website enquiry') + '&body=' + encodeURIComponent(text);
+      if (wa) { var w = window.open(url, '_blank', 'noopener'); if (!w) window.location.href = url; }
+      else window.location.href = url;
+      var msg = form.querySelector('.form-status');
+      if (msg) msg.textContent = wa ? 'WhatsApp is opening with your message ready to send.' : 'Your email app is opening with your message ready to send.';
     });
-  });
+  }
 })();

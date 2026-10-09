@@ -1,69 +1,103 @@
+/* CK Farm: small site scripts, no dependencies. Loaded at the end of <body>. */
 (function () {
   'use strict';
-  var WA = '256752557746';
+  var WHATSAPP = '256752557746';
+  var root = document.documentElement;
+  root.classList.add('js');
 
-  // Year
-  var y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
+  // Current year
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   // Header shadow on scroll
   var header = document.querySelector('.site-header');
-  function onScroll() { if (header) header.classList.toggle('scrolled', window.scrollY > 10); }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
   onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   // Mobile menu
-  var burger = document.querySelector('.burger');
-  var nav = document.getElementById('nav');
-  if (burger && nav) {
-    burger.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    if (!toggle) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
     });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        nav.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        burger.setAttribute('aria-label', 'Open menu');
-      });
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
     });
   }
 
-  // Scroll reveal
-  var els = document.querySelectorAll('.reveal');
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!('IntersectionObserver' in window) || reduce) {
-    els.forEach(function (el) { el.classList.add('is-visible'); });
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
   } else {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function (el) { io.observe(el); });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
   }
 
-  // Order form -> WhatsApp
-  var form = document.getElementById('orderForm');
+  // Pause background videos for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  // Enquiry form -> WhatsApp message with the details already typed
+  var form = document.getElementById('enquiry-form');
   if (form) {
-    form.addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      var f = form.elements, err = form.querySelector('.form-error');
-      var products = Array.prototype.slice.call(form.querySelectorAll('input[name="product"]:checked')).map(function (i) { return i.value; });
-      var name = f.name.value.trim();
-      if (!name || !products.length) { err.hidden = false; return; }
-      err.hidden = true;
-      var lines = ['Hello CK Farm, I would like to order:'];
-      products.forEach(function (p) {
-        var q = p === 'Coffee' ? f.coffeeQty.value.trim() : f.bananaQty.value.trim();
-        lines.push('• ' + p + (q ? ': ' + q : ''));
+    var params = new URLSearchParams(window.location.search);
+    params.forEach(function (value, key) {
+      var els = form.querySelectorAll('[name="' + key + '"]');
+      els.forEach(function (el) {
+        if (el.tagName === 'SELECT') {
+          for (var i = 0; i < el.options.length; i++) { if (el.options[i].value === value) { el.selectedIndex = i; break; } }
+        } else if (el.type === 'radio' || el.type === 'checkbox') {
+          if (el.value === value) el.checked = true;
+        }
       });
-      lines.push('', 'Name: ' + name, 'Buyer type: ' + f.buyer.value);
-      if (f.place.value.trim()) lines.push('Collection / delivery: ' + f.place.value.trim());
-      if (f.notes.value.trim()) lines.push('Message: ' + f.notes.value.trim());
-      lines.push('', 'Please confirm availability and price. Thank you!');
-      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+    });
+
+    function message() {
+      var lines = [form.getAttribute('data-hello') || 'Hello!', ''];
+      var seen = {};
+      [].slice.call(form.elements).forEach(function (el) {
+        if (!el.name || seen[el.name] || el.type === 'submit' || el.tagName === 'BUTTON') return;
+        var label = el.getAttribute('data-label') || (el.closest('fieldset') && el.closest('fieldset').getAttribute('data-label')) || el.name;
+        var value = '';
+        if (el.type === 'radio' || el.type === 'checkbox') {
+          seen[el.name] = true;
+          value = [].slice.call(form.querySelectorAll('[name="' + el.name + '"]:checked')).map(function (c) { return c.value; }).join(', ');
+        } else if (el.tagName === 'SELECT') {
+          value = el.selectedIndex > 0 || (el.options[el.selectedIndex] && el.options[el.selectedIndex].value) ? el.options[el.selectedIndex].text : '';
+        } else {
+          value = String(el.value || '').trim();
+        }
+        if (!value) return;
+        if (el.tagName === 'TEXTAREA') lines.push('', label + ':', value);
+        else lines.push(label + ': ' + value);
+      });
+      return lines.join('\n');
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var url = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message());
+      var a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove();
     });
   }
 })();

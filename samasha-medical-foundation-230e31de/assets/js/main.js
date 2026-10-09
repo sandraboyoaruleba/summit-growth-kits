@@ -1,82 +1,99 @@
-/* Samasha Medical Foundation — vanilla JS, no dependencies */
+/* Samasha Medical Foundation: small site scripts, no dependencies. Loaded at the end of <body>. */
 (function () {
   'use strict';
+  var WHATSAPP = '256752557746';
   var root = document.documentElement;
   root.classList.add('js');
 
   // Current year
-  document.querySelectorAll('[data-year]').forEach(function (el) {
-    el.textContent = new Date().getFullYear();
-  });
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   // Header shadow on scroll
   var header = document.querySelector('.site-header');
-  function onScroll() {
-    if (header) header.classList.toggle('is-scrolled', window.scrollY > 12);
-  }
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
   // Mobile menu
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    if (!toggle) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      document.body.classList.toggle('nav-open', !open);
-    });
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('nav-open');
-      });
-    });
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('nav-open');
-        toggle.focus();
-      }
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
     });
   }
 
-  // Scroll reveal (content is visible without JS; hidden only under .js)
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
   if (reduce || !('IntersectionObserver' in window)) {
-    items.forEach(function (el) { el.classList.add('is-visible'); });
+    showAll();
   } else {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
     items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
   }
 
-  // WhatsApp enquiry form -> prefilled wa.me message
+  // Pause background videos for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  // Enquiry form -> WhatsApp message with the details typed in.
+  // Every field with data-label is added to the message as "Label: value".
   var form = document.getElementById('enquiry-form');
   if (form) {
+    var params = new URLSearchParams(window.location.search);
+    var select = form.querySelector('#f-service');
+    var preset = params.get('service');
+    if (preset && select) {
+      for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === preset) { select.selectedIndex = i; break; }
+      }
+    }
+    var extra = params.get('option');
+    if (extra) {
+      var radio = form.querySelector('input[type="radio"][value="' + extra.replace(/"/g, '') + '"]');
+      if (radio) radio.checked = true;
+    }
+    function message() {
+      var lines = [form.getAttribute('data-intro') || 'Hello! I found you on your website.', ''];
+      form.querySelectorAll('[data-label]').forEach(function (el) {
+        var v = '';
+        if (el.tagName === 'SELECT') { v = el.selectedIndex > 0 || el.options[el.selectedIndex].value ? el.options[el.selectedIndex].text : ''; }
+        else if (el.tagName === 'FIELDSET') {
+          var picked = [].slice.call(el.querySelectorAll('input:checked')).map(function (c) { return c.value; });
+          v = picked.join(', ');
+        }
+        else { v = String(el.value || '').trim(); }
+        if (!v) return;
+        if (el.getAttribute('data-label') === '-') lines.push('', v);
+        else lines.push(el.getAttribute('data-label') + ': ' + v);
+      });
+      return lines.join('\n');
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      var d = new FormData(form);
-      var lines = [
-        'Hello Samasha Pharmacy! I would like to place an order / make an enquiry.',
-        '',
-        'Name: ' + (d.get('name') || ''),
-        'Phone: ' + (d.get('phone') || ''),
-        'Request: ' + (d.get('type') || ''),
-        'Delivery or pick-up: ' + (d.get('delivery') || '-'),
-        '',
-        'Items / details: ' + (d.get('message') || '')
-      ];
-      var url = 'https://wa.me/' + form.dataset.wa + '?text=' + encodeURIComponent(lines.join('\n').trim());
-      window.open(url, '_blank', 'noopener');
+      var url = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message());
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) window.location.href = url;
     });
   }
 })();

@@ -1,76 +1,124 @@
+/* Adis Yields Ltd: small site scripts, no dependencies. Loaded at the end of <body>. */
 (function () {
-  var WA = '256751158666';
-  var header = document.querySelector('.header');
-  var burger = document.querySelector('.burger');
-  var nav = document.getElementById('nav');
+  'use strict';
+  var root = document.documentElement;
+  root.classList.add('js');
 
-  // sticky header shadow
-  function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 10); }
-  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  // Current year
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // mobile menu
-  burger.addEventListener('click', function () {
-    var open = burger.getAttribute('aria-expanded') === 'true';
-    burger.setAttribute('aria-expanded', String(!open));
-    burger.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-    nav.classList.toggle('is-open', !open);
-  });
-  nav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () { burger.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); });
-  });
+  // Header shadow on scroll
+  var header = document.querySelector('.site-header');
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // reveal on scroll
-  var els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // Mobile menu
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    if (!toggle) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
+  }
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+  }
+
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function (el, i) { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
-  } else { els.forEach(function (el) { el.classList.add('is-visible'); }); }
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
+  }
 
-  // crate visual
+  // Pause background videos for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  // Enquiry form -> WhatsApp message with the details typed in.
+  // Every field with data-label becomes a line; ticked checkboxes sharing a data-label are joined.
+  var form = document.getElementById('enquiry-form');
+  if (form) {
+    var params = new URLSearchParams(window.location.search);
+    ['service', 'type', 'sector'].forEach(function (key) {
+      var v = params.get(key); if (!v) return;
+      var sel = form.querySelector('select[name="' + key + '"]');
+      if (sel) { for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === v) { sel.selectedIndex = i; break; } } }
+      var radio = form.querySelector('input[type="radio"][name="' + key + '"][value="' + v + '"]');
+      if (radio) radio.checked = true;
+    });
+    var cats = params.get('cat');
+    if (cats) cats.split(',').forEach(function (c) {
+      var box = form.querySelector('input[type="checkbox"][value="' + c + '"]'); if (box) box.checked = true;
+    });
+
+    function message() {
+      var lines = [form.getAttribute('data-intro'), ''];
+      var groups = {}; var order = [];
+      [].slice.call(form.querySelectorAll('[data-label]')).forEach(function (el) {
+        var label = el.getAttribute('data-label'); var val = '';
+        if (el.type === 'checkbox' || el.type === 'radio') { if (!el.checked) return; val = el.value; }
+        else if (el.tagName === 'SELECT') { val = el.selectedIndex >= 0 && el.value ? el.options[el.selectedIndex].text : ''; }
+        else { val = String(el.value || '').trim(); }
+        if (!val) return;
+        if (!(label in groups)) { groups[label] = []; order.push(label); }
+        groups[label].push(val);
+      });
+      order.forEach(function (label) {
+        var v = groups[label].join(', ');
+        if (v.indexOf('\n') > -1) lines.push(label + ':', v); else lines.push(label + ': ' + v);
+      });
+      return lines.join('\n');
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var url = 'https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(message());
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) window.location.href = url;
+    });
+  }
+
+  // Crate counter: live egg-tray picture in the order form
   var qty = document.getElementById('f-qty');
   var viz = document.getElementById('crateViz');
   var sum = document.getElementById('crateSum');
-  for (var i = 0; i < 30; i++) viz.appendChild(document.createElement('i'));
-  function render() {
-    var n = Math.max(1, Math.min(500, parseInt(qty.value, 10) || 1));
-    var eggs = viz.children;
-    var lit = Math.min(30, n * 3);
-    for (var j = 0; j < eggs.length; j++) eggs[j].classList.toggle('on', j < lit);
-    sum.textContent = n + (n === 1 ? ' crate · ' : ' crates · ') + (n * 30).toLocaleString() + ' eggs';
+  if (qty && viz) {
+    for (var e = 0; e < 30; e++) viz.appendChild(document.createElement('i'));
+    var eggs = viz.querySelectorAll('i');
+    function draw() {
+      var n = Math.max(1, Math.min(1000, parseInt(qty.value, 10) || 1));
+      var shown = Math.min(30, n * 3);
+      eggs.forEach(function (el, i) { el.classList.toggle('on', i < shown); });
+      if (sum) sum.textContent = n + (n === 1 ? ' crate · ' : ' crates · ') + (n * 30).toLocaleString() + ' eggs';
+    }
+    document.querySelectorAll('.qty button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var n = (parseInt(qty.value, 10) || 1) + parseInt(b.getAttribute('data-step'), 10);
+        qty.value = Math.max(1, Math.min(1000, n)); draw();
+      });
+    });
+    qty.addEventListener('input', draw);
+    draw();
   }
-  qty.addEventListener('input', render);
-  document.querySelectorAll('.qty button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      qty.value = Math.max(1, Math.min(500, (parseInt(qty.value, 10) || 1) + parseInt(b.dataset.step, 10)));
-      render();
-    });
-  });
-  render();
 
-  // WhatsApp order form
-  var form = document.getElementById('orderForm');
-  var msg = document.getElementById('formMsg');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var f = form.elements, ok = true;
-    ['name', 'loc'].forEach(function (k) {
-      var bad = !f[k].value.trim();
-      f[k].classList.toggle('is-invalid', bad);
-      if (bad) ok = false;
-    });
-    if (!ok) { msg.textContent = 'Please add your name and delivery location.'; return; }
-    msg.textContent = '';
-    var text = 'Hello Adis Yields! I would like to order eggs.\n\n' +
-      'Name: ' + f.name.value.trim() + '\n' +
-      'Ordering for: ' + f.type.value + '\n' +
-      'Crates: ' + f.qty.value + ' (' + (f.qty.value * 30) + ' eggs)\n' +
-      'Frequency: ' + f.freq.value + '\n' +
-      'Location: ' + f.loc.value.trim() +
-      (f.note.value.trim() ? '\nNotes: ' + f.note.value.trim() : '');
-    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-  });
-
-  document.getElementById('year').textContent = new Date().getFullYear();
 })();

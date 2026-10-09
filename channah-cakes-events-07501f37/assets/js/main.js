@@ -1,78 +1,110 @@
+/* Channah Cakes & Events: small site scripts (vanilla JS, no dependencies). */
 (function () {
-  var WA = '254721868212';
-  var header = document.querySelector('.header');
-  var burger = document.querySelector('.burger');
-  var nav = document.getElementById('nav');
+  "use strict";
+  document.documentElement.classList.add("js");
 
-  function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 10); }
-  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  var WHATSAPP = "254721868212";
+  var GREETING = "Hello Channah Cakes! I found you on your website. Here is my order request:";
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  burger.addEventListener('click', function () {
-    var open = burger.getAttribute('aria-expanded') === 'true';
-    burger.setAttribute('aria-expanded', String(!open));
-    burger.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-    nav.classList.toggle('is-open', !open);
-  });
-  nav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () { burger.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); });
-  });
+  // Footer year
+  document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // reveal
-  var els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // Mobile menu
+  var toggle = document.querySelector(".nav-toggle");
+  var nav = document.getElementById("site-nav");
+  function setNav(open) {
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    var l = toggle.querySelector(".nt-label"); if (l) l.textContent = open ? "Close" : "Menu";
+  }
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () { setNav(!nav.classList.contains("is-open")); });
+    nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setNav(false); }); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("is-open")) { setNav(false); toggle.focus(); } });
+  }
+
+  // Scroll reveal (content is visible without JS; hidden only under .js .reveal)
+  var reveals = document.querySelectorAll(".reveal");
+  if (!reduceMotion && "IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function (el, i) { el.style.transitionDelay = (i % 3) * 90 + 'ms'; io.observe(el); });
-  } else { els.forEach(function (el) { el.classList.add('is-visible'); }); }
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: "0px 0px -5% 0px", threshold: 0.04 });
+    reveals.forEach(function (el) { io.observe(el); });
+    // Safety net: anything still hidden once the page bottom is reached gets shown
+    window.addEventListener("scroll", function () {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 40) {
+        reveals.forEach(function (el) { el.classList.add("is-visible"); });
+      }
+    }, { passive: true });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("is-visible"); });
+  }
 
-  // tabs (accessible)
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
-  function select(tab) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute('aria-selected', String(on));
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+  // Background videos: play only while on screen, never with reduced motion
+  var vids = document.querySelectorAll("video.stock-video");
+  if (reduceMotion) {
+    vids.forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+  } else if ("IntersectionObserver" in window) {
+    var vo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else { v.pause(); }
+      });
+    }, { threshold: 0.05 });
+    vids.forEach(function (v) { vo.observe(v); });
+  }
+
+  // Gallery filter
+  var fbar = document.querySelector(".filter-bar");
+  if (fbar) {
+    var figs = document.querySelectorAll("[data-cat]");
+    fbar.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      fbar.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      var cat = b.getAttribute("data-filter");
+      figs.forEach(function (f) { f.hidden = !(cat === "all" || (" " + f.getAttribute("data-cat") + " ").indexOf(" " + cat + " ") > -1); });
     });
   }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { select(t); });
-    t.addEventListener('keydown', function (e) {
-      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (!d) return;
-      var n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus();
+
+  // Enquiry form: no server. Builds a WhatsApp message from every labelled field.
+  var form = document.getElementById("enquiry-form");
+  if (form) {
+    var params = new URLSearchParams(window.location.search);
+    ["service", "occasion", "type"].forEach(function (key) {
+      var val = params.get(key); if (!val) return;
+      var sel = form.querySelector("[name='" + key + "']");
+      if (sel && sel.tagName === "SELECT") {
+        for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === val) { sel.selectedIndex = i; break; } }
+      }
     });
-  });
-
-  // min date = today
-  var date = document.getElementById('f-date');
-  try { date.min = new Date().toISOString().slice(0, 10); } catch (e) {}
-
-  // WhatsApp form
-  var form = document.getElementById('orderForm');
-  var msg = document.getElementById('formMsg');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var f = form.elements, ok = true;
-    ['name', 'date'].forEach(function (k) {
-      var bad = !f[k].value.trim(); f[k].classList.toggle('is-invalid', bad); if (bad) ok = false;
+    if (params.get("service") && window.location.hash !== "#enquiry") {
+      var target = document.getElementById("enquiry");
+      if (target) setTimeout(function () { target.scrollIntoView(); }, 60);
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var lines = [GREETING, ""];
+      form.querySelectorAll("[data-label]").forEach(function (el) {
+        var label = el.getAttribute("data-label"), val = "";
+        if (el.tagName === "FIELDSET") {
+          var picked = [];
+          el.querySelectorAll("input:checked").forEach(function (c) { picked.push(c.value); });
+          val = picked.join(", ");
+        } else if (el.tagName === "SELECT") {
+          val = el.value ? el.options[el.selectedIndex].text : "";
+        } else {
+          val = (el.value || "").trim();
+        }
+        if (val) lines.push(label + ": " + val);
+      });
+      window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener");
+      var msg = document.getElementById("form-msg");
+      if (msg) msg.textContent = "WhatsApp is opening with your message. Just press send.";
     });
-    var wants = Array.prototype.slice.call(form.querySelectorAll('input[name="want"]:checked')).map(function (c) { return c.value; });
-    if (!ok) { msg.textContent = 'Please add your name and the date you need it.'; return; }
-    if (!wants.length) { msg.textContent = 'Pick at least one treat.'; return; }
-    msg.textContent = '';
-    var text = 'Hello Channah Cakes & Events! 🎂\n\n' +
-      'Name: ' + f.name.value.trim() + '\n' +
-      'I would like: ' + wants.join(', ') + '\n' +
-      'Occasion: ' + f.occ.value + '\n' +
-      'Date needed: ' + f.date.value + '\n' +
-      'Cake size: ' + f.size.value + '\n' +
-      'Flavour: ' + f.flav.value +
-      (f.idea.value.trim() ? '\nDesign / message: ' + f.idea.value.trim() : '') +
-      (f.loc.value.trim() ? '\nDelivery area: ' + f.loc.value.trim() : '');
-    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-  });
-
-  document.getElementById('year').textContent = new Date().getFullYear();
+  }
 })();

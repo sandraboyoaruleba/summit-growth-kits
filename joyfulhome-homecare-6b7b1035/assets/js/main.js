@@ -95,8 +95,8 @@
       e.preventDefault();
       if (!form.reportValidity()) return;
       var url = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(message());
-      var w = window.open(url, '_blank', 'noopener');
-      if (!w) window.location.href = url;
+      var w = window.open(url, '_blank');
+      if (w) { w.opener = null; } else { window.location.href = url; }
     });
   }
 })();

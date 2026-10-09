@@ -47,6 +47,14 @@
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     reveals.forEach(function (el) { io.observe(el); });
+    // safety net: anything above the bottom of the screen shows (after a jump or a layout shift)
+    var sweep = function () {
+      var h = window.innerHeight;
+      reveals.forEach(function (el) { if (!el.classList.contains('is-visible') && el.getBoundingClientRect().top < h) el.classList.add('is-visible'); });
+    };
+    var sweepT = null;
+    window.addEventListener('scroll', function () { if (!sweepT) sweepT = setTimeout(function () { sweepT = null; sweep(); }, 200); }, { passive: true });
+    window.addEventListener('load', sweep);
   } else {
     reveals.forEach(function (el) { el.classList.add('is-visible'); });
   }
@@ -76,6 +84,15 @@
     if (initial) activate(initial);
   });
 
+  if (reduceMotion) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  // ?service=micr (etc.) pre-selects the interest on the booking form
+  var pre = new URLSearchParams(window.location.search).get('service');
+  var sel = document.getElementById('f-service');
+  if (pre && sel) {
+    for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === pre) { sel.selectedIndex = i; break; } }
+  }
+
   // WhatsApp enquiry forms: build a prefilled wa.me message (no backend)
   document.querySelectorAll('form[data-wa]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
@@ -85,12 +102,14 @@
       form.querySelectorAll('[name]').forEach(function (field) {
         if ((field.type === 'checkbox' || field.type === 'radio') && !field.checked) return;
         var val = (field.value || '').trim();
+        if (field.tagName === 'SELECT' && field.selectedIndex > -1) val = field.options[field.selectedIndex].text.trim();
         if (!val) return;
         var label = field.getAttribute('data-label') || field.name;
         lines.push('• ' + label + ': ' + val);
       });
       var url = 'https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(lines.join('\n'));
-      window.open(url, '_blank', 'noopener');
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) window.location.href = url;
     });
   });
 })();

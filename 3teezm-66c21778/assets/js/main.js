@@ -1,75 +1,108 @@
+/* Small site scripts, no dependencies. Loaded at the end of <body>. */
 (function () {
-  var WA = '256701359380';
-  var burger = document.querySelector('.burger');
-  var nav = document.getElementById('nav');
+  'use strict';
+  var root = document.documentElement;
+  root.classList.add('js');
 
-  burger.addEventListener('click', function () {
-    var open = burger.getAttribute('aria-expanded') === 'true';
-    burger.setAttribute('aria-expanded', String(!open));
-    burger.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-    nav.classList.toggle('is-open', !open);
-  });
-  nav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () { burger.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); });
-  });
+  // Current year
+  document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
-  // reveal
-  var els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function (el, i) { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
-  } else { els.forEach(function (el) { el.classList.add('is-visible'); }); }
+  // Header shadow on scroll
+  var header = document.querySelector('.site-header');
+  function onScroll() { if (header) header.classList.toggle('is-scrolled', window.scrollY > 10); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // form: switch fields by line
-  var form = document.getElementById('orderForm');
-  var qtyLabel = document.getElementById('qtyLabel');
-  var qty = document.getElementById('f-qty');
-  var noteLabel = document.getElementById('noteLabel');
-  var note = document.getElementById('f-note');
-  var copy = {
-    Taste: ['Quantity', 'e.g. 3 chickens, 2 sausage packs', 'Location & notes', 'e.g. Delivery to Kira, after 5pm'],
-    Treats: ['Quantity', 'e.g. 2 packs, 1 gift jar', 'Location & notes', 'e.g. For a birthday on Saturday'],
-    Talent: ['Organisation & team size', 'e.g. Bright Kids School, 25 staff', 'Your HR challenge', 'e.g. We need proper contracts and a staff handbook']
-  };
-  function setLine(line) {
-    form.querySelectorAll('[data-for]').forEach(function (f) { f.hidden = f.dataset.for !== line; });
-    qtyLabel.textContent = copy[line][0]; qty.placeholder = copy[line][1];
-    noteLabel.textContent = copy[line][2]; note.placeholder = copy[line][3];
+  // Mobile menu
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.getElementById('site-nav');
+  function setMenu(open) {
+    if (!toggle) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('nav-open', open);
   }
-  form.querySelectorAll('input[name="line"]').forEach(function (r) {
-    r.addEventListener('change', function () { setLine(r.value); });
-  });
-  // CTA buttons preselect the line
-  document.querySelectorAll('[data-line]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var r = form.querySelector('input[name="line"][value="' + b.dataset.line + '"]');
-      if (r) { r.checked = true; setLine(b.dataset.line); }
-      if (b.dataset.bundle) { var s = document.getElementById('f-talent'); s.value = 'Team Day bundle (workshop + food)'; }
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) { setMenu(false); toggle.focus(); }
     });
-  });
-  setLine('Taste');
+    document.addEventListener('click', function (e) {
+      if (document.body.classList.contains('nav-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+  }
 
-  var msg = document.getElementById('formMsg');
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var f = form.elements;
-    var name = f.name.value.trim();
-    f.name.classList.toggle('is-invalid', !name);
-    if (!name) { msg.textContent = 'Please add your name.'; return; }
-    msg.textContent = '';
-    var line = form.querySelector('input[name="line"]:checked').value;
-    var item = line === 'Taste' ? f.taste.value : line === 'Treats' ? f.treats.value : f.talent.value;
-    var heads = { Taste: 'Food order (chicken / sausages)', Treats: 'Cookie order', Talent: 'HR consulting enquiry' };
-    var text = 'Hello Racheal / 3TeezM!\n\n' + heads[line] + '\n' +
-      'Name: ' + name + '\n' +
-      (line === 'Talent' ? 'Service: ' : 'Item: ') + item +
-      (f.qty.value.trim() ? '\n' + qtyLabel.textContent + ': ' + f.qty.value.trim() : '') +
-      (f.when.value ? '\nDate: ' + f.when.value : '') +
-      (f.note.value.trim() ? '\n' + noteLabel.textContent + ': ' + f.note.value.trim() : '');
-    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-  });
+  // Scroll reveal: content is visible without JS; it is only hidden under .js .reveal
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  function showAll() { items.forEach(function (el) { el.classList.add('is-visible'); }); }
+  if (reduce || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
+    items.forEach(function (el) { io.observe(el); });
+    window.addEventListener('load', function () {
+      items.forEach(function (el) { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-visible'); });
+    });
+  }
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+  // Pause background videos for reduced motion
+  if (reduce) document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+
+  // Enquiry form -> WhatsApp message with the details typed in.
+  // Any URL parameter that matches a field name pre-fills it (e.g. contact.html?service=printing).
+  var form = document.getElementById('enquiry-form');
+  if (form) {
+    var params = new URLSearchParams(window.location.search);
+    params.forEach(function (value, key) {
+      var el = form.elements[key];
+      if (!el || !value) return;
+      if (el.tagName === 'SELECT') {
+        for (var i = 0; i < el.options.length; i++) {
+          var o = el.options[i];
+          if (o.value === value || o.text === value) { el.selectedIndex = i; break; }
+        }
+      } else if (el.length && el[0] && el[0].type === 'radio') {
+        [].forEach.call(el, function (r) { if (r.value === value) r.checked = true; });
+      } else if (el.type !== 'radio') {
+        el.value = value;
+      }
+    });
+
+    function fieldText(el) {
+      if (el.tagName === 'SELECT') return el.value ? el.options[el.selectedIndex].text : '';
+      return String(el.value || '').trim();
+    }
+    function message() {
+      var lines = [form.getAttribute('data-intro') || 'Hello! I found you on your website.', ''];
+      var seen = {};
+      form.querySelectorAll('[data-label]').forEach(function (el) {
+        var label = el.getAttribute('data-label');
+        if (el.type === 'radio') {
+          if (seen[el.name]) return;
+          seen[el.name] = true;
+          var c = form.querySelector('input[name="' + el.name + '"]:checked');
+          if (c) lines.push(label + ': ' + c.value);
+          return;
+        }
+        var v = fieldText(el);
+        if (!v) return;
+        if (el.tagName === 'TEXTAREA') lines.push('', v);
+        else lines.push(label + ': ' + v);
+      });
+      return lines.join('\n');
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var url = 'https://wa.me/' + form.getAttribute('data-wa') + '?text=' + encodeURIComponent(message());
+      var w = window.open(url, '_blank', 'noopener');
+      if (!w) window.location.href = url;
+    });
+  }
 })();
