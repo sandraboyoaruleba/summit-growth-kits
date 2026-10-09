@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Radiant Mind Africa">
+  <rect width="64" height="64" rx="16" fill="#14161f"/>
+  <g>
+    <ellipse cx="32" cy="12" rx="3.2" ry="7" fill="#f15a29"/>
+    <ellipse cx="21" cy="16" rx="3" ry="6.5" fill="#ffcb05" transform="rotate(-40 21 16)"/>
+    <ellipse cx="43" cy="16" rx="3" ry="6.5" fill="#00aeef" transform="rotate(40 43 16)"/>
+    <ellipse cx="15" cy="27" rx="3" ry="6.5" fill="#8cc63f" transform="rotate(-75 15 27)"/>
+    <ellipse cx="49" cy="27" rx="3" ry="6.5" fill="#d91c5c" transform="rotate(75 49 27)"/>
+    <ellipse cx="26" cy="22" rx="2.4" ry="5" fill="#662d91" transform="rotate(-20 26 22)"/>
+    <ellipse cx="38" cy="22" rx="2.4" ry="5" fill="#f7941d" transform="rotate(20 38 22)"/>
+  </g>
+  <circle cx="32" cy="31" r="3.6" fill="#fff"/>
+  <path d="M20 26c5 6 8.5 9 10 12l-1.2 18h6.4L34 38c1.5-3 5-6 10-12-4.5 3-8.5 5.5-12 6.2C28.5 31.5 24.5 29 20 26z" fill="#fff"/>
+</svg>

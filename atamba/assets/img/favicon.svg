@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Atamba">
+  <rect width="64" height="64" rx="20" fill="#C8664B"/>
+  <path d="M32 50c-9.5-6.2-15-11.6-15-18.4C17 26.6 20.6 23 25 23c3 0 5.4 1.7 7 4.2 1.6-2.5 4-4.2 7-4.2 4.4 0 8 3.6 8 8.6C47 38.4 41.5 43.8 32 50z" fill="#FBF6EE"/>
+  <circle cx="32" cy="15" r="5" fill="#E9B44C"/>
+  <path d="M26.5 36.5c2.8 2.6 8.2 2.6 11 0" stroke="#C8664B" stroke-width="3" stroke-linecap="round" fill="none"/>
+</svg>

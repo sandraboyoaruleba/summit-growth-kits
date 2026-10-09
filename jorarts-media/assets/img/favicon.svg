@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JorartS MEDIA">
+  <rect width="64" height="64" rx="14" fill="#0b1433"/>
+  <path d="M40 12c-6-2-15 0-15 6v20c0 6-4 10-10 9" fill="none" stroke="#d4af5a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="38" cy="36" r="10" fill="none" stroke="#f3eee2" stroke-width="4"/>
+  <path d="M38 31v10M33 36h0" stroke="#f3eee2" stroke-width="4" stroke-linecap="round"/>
+  <path d="M15 47c8 3 22 4 36-4" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cure Spot Pharmacy">
+  <rect width="64" height="64" rx="18" fill="#0E5A55"/>
+  <path d="M26 14h12v12h12v12H38v12H26V38H14V26h12z" fill="#F4FBF8"/>
+  <circle cx="46" cy="46" r="7" fill="#FF7A59"/>
+</svg>

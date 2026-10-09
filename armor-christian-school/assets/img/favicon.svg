@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Armor Christian School">
+  <path d="M32 4 8 12v18c0 15 10.5 25.5 24 30 13.5-4.5 24-15 24-30V12L32 4Z" fill="#1C2B5A"/>
+  <path d="M32 9.5 13 16v14c0 12 8.2 20.6 19 24.6 10.8-4 19-12.6 19-24.6V16L32 9.5Z" fill="#FFC93C"/>
+  <path d="M32 18v20M24.5 25h15" stroke="#1C2B5A" stroke-width="4.2" stroke-linecap="round"/>
+  <path d="M19 42c4.5-2.6 9-2.6 13 0 4-2.6 8.5-2.6 13 0" fill="none" stroke="#FF6B5B" stroke-width="3.4" stroke-linecap="round"/>
+</svg>

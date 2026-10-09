@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Marbby Laboratory Supplies">
+  <rect width="64" height="64" rx="14" fill="#0b2b4a"/>
+  <path d="M25 10h14M27 10v15L14 49a4 4 0 0 0 3.5 6h29a4 4 0 0 0 3.5-6L37 25V10" fill="none" stroke="#e8f6f9" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M19.5 42h25l4 7.4A2 2 0 0 1 46.7 52H17.3a2 2 0 0 1-1.8-2.6z" fill="#19b5c9"/>
+  <circle cx="28" cy="46" r="2" fill="#f2a541"/><circle cx="35" cy="48" r="1.4" fill="#e8f6f9"/><circle cx="32" cy="36" r="1.6" fill="#19b5c9"/>
+</svg>

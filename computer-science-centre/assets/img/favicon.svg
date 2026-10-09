@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Computer Science Centre">
+  <rect width="64" height="64" rx="14" fill="#111111"/>
+  <g style="mix-blend-mode:screen">
+    <circle cx="26" cy="27" r="12" fill="#00a6d6"/>
+    <circle cx="38" cy="27" r="12" fill="#e6007e" opacity=".9"/>
+    <circle cx="32" cy="37" r="12" fill="#ffd400" opacity=".85"/>
+  </g>
+  <text x="32" y="58" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="800" fill="#ffffff" letter-spacing="1.5">CSC</text>
+</svg>

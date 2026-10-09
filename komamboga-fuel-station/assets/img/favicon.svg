@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Komamboga Fuel Station">
+  <rect width="64" height="64" rx="14" fill="#0B1F1E"/>
+  <path d="M32 8C32 8 15 28 15 39a17 17 0 0 0 34 0C49 28 32 8 32 8Z" fill="#FFB703"/>
+  <path d="M26 30v20M26 41l10-11M29 38l8 12" stroke="#0B1F1E" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="45" cy="17" r="5" fill="#8BD450"/>
+</svg>

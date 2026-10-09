@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Momoz Oven Cafe">
+  <rect width="64" height="64" rx="18" fill="#C8442B"/>
+  <path d="M14 46V30a18 18 0 0 1 36 0v16" fill="none" stroke="#FBF4EA" stroke-width="4" stroke-linecap="round"/>
+  <path d="M22 44V31l5 7 5-7 5 7 5-7v13" fill="none" stroke="#F2B445" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 50h44" stroke="#FBF4EA" stroke-width="4" stroke-linecap="round"/>
+</svg>

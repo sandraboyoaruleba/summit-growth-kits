@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BGK General Supplies">
+  <rect width="64" height="64" rx="16" fill="#1f3a2b"/>
+  <g fill="#e8a33d">
+    <ellipse cx="32" cy="14" rx="4.2" ry="7" />
+    <ellipse cx="22.5" cy="22" rx="4.2" ry="7" transform="rotate(-40 22.5 22)"/>
+    <ellipse cx="41.5" cy="22" rx="4.2" ry="7" transform="rotate(40 41.5 22)"/>
+  </g>
+  <text x="32" y="50" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="19" font-weight="700" fill="#f6efe2" letter-spacing="1">BGK</text>
+</svg>
