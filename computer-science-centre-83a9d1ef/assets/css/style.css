@@ -242,3 +242,11 @@ details p{margin:.7rem 0 0;color:var(--muted)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* Polish pass */
+.cur-note{margin-top:.3rem}
+.w5 img{object-position:28% center}
+.why-video{margin:2rem 0 0;position:relative;aspect-ratio:4/3;border:2px solid var(--k);border-radius:var(--radius);overflow:hidden;box-shadow:8px 8px 0 var(--m)}
+.why-video img,.why-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+@media (prefers-reduced-motion: reduce){.stock-video{display:none}}
+.map{background:#1b1b1b url("../img/favicon.svg") center/64px no-repeat}

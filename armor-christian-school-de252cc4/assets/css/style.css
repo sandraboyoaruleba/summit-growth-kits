@@ -237,3 +237,14 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--s
   .site-nav { visibility: hidden; transition: transform .35s ease, visibility 0s linear .35s; }
   .nav-open .site-nav { visibility: visible; transition: transform .35s ease; }
 }
+
+/* bookshop media + prices */
+.books-top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: center; margin-bottom: 2.6rem; }
+.books-top .head { margin-bottom: 0; }
+.books-media { position: relative; border-radius: var(--r); overflow: hidden; aspect-ratio: 16/10; box-shadow: var(--shadow); border: 6px solid #fff; }
+.books-media img, .books-media .stock-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.book .price { margin: .8rem 0 0; font: 700 1.05rem var(--f-d); color: var(--navy); }
+.cur { font-size: .72em; font-weight: 800; letter-spacing: .04em; margin-right: .15em; opacity: .85; }
+.cur-note { text-align: center; margin: .5rem 0 0; font-size: .85rem; color: var(--muted); }
+@media (max-width: 900px) { .books-top { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none; } }

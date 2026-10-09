@@ -45,7 +45,7 @@
       p.querySelector('output').textContent = qty[i];
       p.classList.toggle('has', qty[i] > 0);
       if (qty[i] > 0) {
-        lines.push(qty[i] + ' × ' + p.getAttribute('data-name'));
+        lines.push(qty[i] + ' × ' + p.getAttribute('data-name') + ' (' + fmt(Number(p.getAttribute('data-price'))) + ' each)');
         total += qty[i] * Number(p.getAttribute('data-price'));
       }
     });

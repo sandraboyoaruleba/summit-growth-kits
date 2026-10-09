@@ -260,3 +260,11 @@ p { margin: 0 0 1em; }
 .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .75s cubic-bezier(.2, .7, .2, 1), transform .75s cubic-bezier(.2, .7, .2, 1); }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; } .float-card { animation: none; } }
+
+/* currency, test prices, stock video */
+.cur { font-size: .74em; font-weight: 800; letter-spacing: .04em; margin-right: .15em; }
+.test__price { display: inline-block; margin-top: .55rem; padding: .2rem .7rem; border-radius: 999px; background: rgba(46, 204, 139, .16); color: #b9f3d6; font-size: .9rem; font-weight: 700; }
+.tile--big .stock-video { width: 100%; flex: 1; min-height: 300px; object-fit: cover; display: block; background: #f4ece4 url("../video/pills.jpg") center/cover no-repeat; }
+.tile--big .video-fallback { display: none; }
+@media (max-width: 860px) { .tile--big .stock-video { aspect-ratio: 16 / 10; flex: none; min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none !important; } .tile--big .video-fallback { display: block; } }

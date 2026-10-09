@@ -250,3 +250,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--murram);
   html{scroll-behavior:auto}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* polish pass: currency + block-laying video */
+.cur{font-size:.85em;letter-spacing:.04em;margin-right:.1em}
+.cur-note{font-size:.85rem;opacity:.75;margin-top:.6rem}
+.process__img .stock-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion: reduce){ .stock-video{display:none} }

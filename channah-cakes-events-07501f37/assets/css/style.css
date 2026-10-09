@@ -252,3 +252,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--berry);b
   html{scroll-behavior:auto}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* currency + order media video */
+.cur{font-size:.75em;letter-spacing:.04em;margin-right:.1em}
+.cur-note{margin:22px 0 0;font-size:.85rem;color:var(--muted);text-align:center}
+.order__media{position:relative;margin-top:24px;width:70%;aspect-ratio:3/4;border-radius:999px 999px var(--r) var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.order__media .order__img,.order__media .stock-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;margin:0;border-radius:0;box-shadow:none;display:block}
+@media (max-width:1000px){.order__media{display:none}}
+@media (prefers-reduced-motion:reduce){.stock-video{display:none}}

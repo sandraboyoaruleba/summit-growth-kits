@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Eunie's Kitchen">
-  <circle cx="32" cy="32" r="31" fill="#9e1b28"/>
-  <circle cx="32" cy="32" r="27" fill="none" stroke="#f6e7d2" stroke-width="1.2" stroke-dasharray="2 3"/>
-  <path d="M20 30c-4 0-6.5-3-6.5-6.3 0-3.6 2.9-6.4 6.4-6.4.6 0 1.2.1 1.8.3A8.6 8.6 0 0 1 32 12a8.6 8.6 0 0 1 10.3 5.6c.6-.2 1.2-.3 1.8-.3 3.5 0 6.4 2.8 6.4 6.4 0 3.3-2.5 6.3-6.5 6.3v8H20z" fill="#fbf4ea"/>
-  <rect x="20" y="40" width="24" height="5" rx="1.5" fill="#e9a23b"/>
-  <text x="32" y="56" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="9" fill="#fbf4ea">EK</text>
+  <circle cx="32" cy="32" r="31" fill="#a51c21"/>
+  <circle cx="32" cy="32" r="26.5" fill="none" stroke="#f6cf87" stroke-width="1.3" stroke-dasharray="2.2 3.2"/>
+  <path d="M21.5 31.5c-3.6 0-6-2.8-6-5.8 0-3.3 2.7-5.9 5.9-5.9.6 0 1.1.1 1.7.3A8 8 0 0 1 32 14.6a8 8 0 0 1 8.9 5.5c.6-.2 1.1-.3 1.7-.3 3.2 0 5.9 2.6 5.9 5.9 0 3-2.4 5.8-6 5.8v6.7h-21z" fill="#fbf6ee"/>
+  <rect x="21.5" y="40" width="21" height="4.2" rx="1.6" fill="#e9a23b"/>
+  <path d="M26.3 47.5v4.8M32 47.5v4.8M37.7 47.5v4.8" stroke="#fbf6ee" stroke-width="2" stroke-linecap="round"/>
 </svg>

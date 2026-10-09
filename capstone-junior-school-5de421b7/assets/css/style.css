@@ -253,3 +253,12 @@ details p{color:var(--muted);padding-bottom:16px;margin:0}
   .brand-text strong{font-size:1.25rem}
   .strip{font-size:1.05rem}
 }
+
+/* currency + video band */
+.cur{font-size:.78em;font-weight:800;letter-spacing:.04em;margin-right:.1em}
+.fees-note{font-size:.85rem;color:var(--muted);margin:-8px 0 20px}
+.video-band{position:relative;height:clamp(240px,34vw,420px);overflow:hidden;background:var(--navy) url("../video/crayons.jpg") center/cover no-repeat}
+.video-band .stock-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video-band__overlay{position:absolute;inset:0;display:flex;align-items:center;background:linear-gradient(90deg,rgba(20,26,77,.88) 0%,rgba(20,26,77,.6) 45%,rgba(20,26,77,.1) 100%)}
+.video-band__title{font-family:var(--font-display);font-weight:600;color:#fff;font-size:clamp(1.6rem,3.6vw,2.8rem);line-height:1.1;max-width:15ch;margin:0}
+@media (prefers-reduced-motion: reduce){ .stock-video{display:none} }

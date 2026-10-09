@@ -232,3 +232,11 @@ p { margin: 0 0 1em; }
 .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1); }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; } .marquee__track, .stamp svg { animation: none; } }
+
+/* currency + stock video */
+.cur { font-size: .72em; letter-spacing: .05em; margin-right: .2em; }
+.pricelist li b .cur { flex: none; display: inline; gap: 0; }
+.pricelist li b .cur::after { display: none; }
+.story__img .stock-video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 260px 260px 26px 26px; background: #5a1822 url("../video/hens.jpg") center/cover no-repeat; }
+.story__img .video-fallback { display: none; }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none !important; } .story__img .video-fallback { display: block; } }

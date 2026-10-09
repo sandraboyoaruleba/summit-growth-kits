@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for Komamboga Fuel Station &amp; Grocery. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for Komamboga Fuel Station &amp; Grocery by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header">
@@ -40,7 +40,7 @@
 
 <main id="main">
   <section class="hero" id="top">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1695561324569-5e47c76dc0a3?auto=format&fit=crop&w=2000&q=80" alt="Fuel station forecourt lit up at night" width="1600" height="900">
+    <img class="hero-bg" src="assets/img/stock/photo-1695561324569-5e47c76dc0a3-2000.jpg" alt="Fuel station forecourt lit up at night" width="1600" height="900">
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <div class="hero-copy">
@@ -54,10 +54,10 @@
       </div>
       <aside class="board reveal" aria-label="Today's pump prices" data-placeholder="Pump prices – update daily or remove">
         <div class="board-head"><span>Today’s pump prices</span><span class="live">UGX / litre</span></div>
-        <div class="board-row"><span>Petrol</span><b>5,000</b></div>
-        <div class="board-row"><span>Diesel</span><b>4,850</b></div>
-        <div class="board-row"><span>Paraffin</span><b>4,200</b></div>
-        <p class="board-foot">Prices change with the market. Call to confirm.</p>
+        <div class="board-row"><span>Petrol</span><b><span class="cur">UGX</span> 5,000</b></div>
+        <div class="board-row"><span>Diesel</span><b><span class="cur">UGX</span> 4,850</b></div>
+        <div class="board-row"><span>Paraffin</span><b><span class="cur">UGX</span> 4,200</b></div>
+        <p class="board-foot">All prices in Ugandan shillings (UGX) per litre. Prices change with the market. Call to confirm.</p>
       </aside>
     </div>
   </section>
@@ -76,7 +76,8 @@
   <section class="section fuel" id="fuel">
     <div class="wrap split">
       <div class="split-media reveal">
-        <img src="https://images.unsplash.com/photo-1635627529674-912a0176c6cc?auto=format&fit=crop&w=1000&q=80" alt="Close-up of a hand holding a fuel pump nozzle while refuelling a car" loading="lazy">
+        <img src="assets/img/stock/photo-1635627529674-912a0176c6cc-1000.jpg" alt="Close-up of a hand holding a fuel pump nozzle while refuelling a car" loading="lazy">
+        <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/refuel.jpg" aria-hidden="true"><source src="assets/video/refuel.mp4" type="video/mp4"></video>
         <span class="chip">Full litres, every time</span>
       </div>
       <div class="reveal">
@@ -104,19 +105,19 @@
       </div>
       <div class="cat-grid">
         <article class="cat reveal">
-          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Shelves of fresh vegetables and fruit" loading="lazy">
+          <img src="assets/img/stock/photo-1542838132-92c53300491e-800.jpg" alt="Shelves of fresh vegetables and fruit" loading="lazy">
           <div><h3>Fresh &amp; daily</h3><p>Bread, milk, eggs, fruit and vegetables.</p></div>
         </article>
         <article class="cat reveal">
-          <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=800&q=80" alt="Grocery aisle stocked with packaged foods" loading="lazy">
+          <img src="assets/img/stock/photo-1604719312566-8912e9227c6a-800.jpg" alt="Grocery aisle stocked with packaged foods" loading="lazy">
           <div><h3>Pantry staples</h3><p>Sugar, rice, flour, cooking oil, tea and more.</p></div>
         </article>
         <article class="cat reveal">
-          <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80" alt="Long, bright supermarket aisle with drinks and snacks" loading="lazy">
+          <img src="assets/img/stock/photo-1578916171728-46686eac8d58-800.jpg" alt="Long, bright supermarket aisle with drinks and snacks" loading="lazy">
           <div><h3>Drinks &amp; snacks</h3><p>Water, sodas, juices and snacks for the road.</p></div>
         </article>
         <article class="cat reveal">
-          <img src="https://images.unsplash.com/photo-1601598851547-4302969d0614?auto=format&fit=crop&w=800&q=80" alt="Shopping trolley in a grocery shop" loading="lazy">
+          <img src="assets/img/stock/photo-1601598851547-4302969d0614-800.jpg" alt="Shopping trolley in a grocery shop" loading="lazy">
           <div><h3>Household &amp; more</h3><p data-placeholder="Confirm: airtime, Mobile Money agent, household items">Soap, toiletries, airtime and Mobile Money.</p></div>
         </article>
       </div>
@@ -209,5 +210,5 @@
 </a>
 
 <script src="assets/js/main.js"></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

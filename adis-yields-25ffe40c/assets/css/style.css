@@ -244,3 +244,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--yolk-dee
   html{scroll-behavior:auto}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* currency + stock video */
+.cur{font-size:.72em;font-weight:700;letter-spacing:.04em;opacity:.85;margin-right:.15em}
+.products__img .stock-video{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;box-shadow:var(--shadow);border:12px solid #fff;background:#e9dcc6}
+.products__img .video-fallback{display:none}
+@media (prefers-reduced-motion: reduce){ .stock-video{display:none !important} .products__img .video-fallback{display:block} }

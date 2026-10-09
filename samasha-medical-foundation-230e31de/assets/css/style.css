@@ -264,3 +264,24 @@ p { margin: 0 0 1em; }
   .ring { display: none; }
   .brand small { display: none; }
 }
+
+/* ---- Polish: pillar photos, project thumbs, reach video, prices, map fallback ---- */
+.pillar-photo { display: block; width: 100%; height: 210px; object-fit: cover; border-radius: 4px 40px 4px 4px; margin-bottom: 1.4rem; }
+.pillar .pillar-photo + .p-ico { margin-top: -3.4rem; margin-left: 1rem; position: relative; border: 4px solid #fff; }
+.proj { overflow: hidden; }
+.proj-thumb { display: block; width: calc(100% + 5.5rem); max-width: none; margin: -2rem -3.5rem 1.4rem -2rem; aspect-ratio: 16 / 7; object-fit: cover; transition: transform .5s; }
+.proj:hover .proj-thumb { transform: scale(1.03); }
+.proj .arrow { z-index: 1; background: #fff; border-radius: 50%; width: 2rem; height: 2rem; display: grid; place-items: center; }
+.reach-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.reach-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(42,15,36,.93) 0%, rgba(42,15,36,.80) 55%, rgba(42,15,36,.72) 100%); }
+.reach .countries li:not(.hq) { background: rgba(42,15,36,.45); }
+.cur { font-size: .7em; font-weight: 700; letter-spacing: .06em; margin-right: .15em; color: var(--green-deep); }
+.price-card { margin-top: 1.6rem; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem 1.4rem; }
+.price-card h3 { font-family: var(--serif); font-weight: 500; font-size: 1.3rem; margin: 0 0 .6rem; }
+.price-card h3 small { font-family: var(--sans); font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange-ink); margin-left: .4rem; }
+.price-card ul { list-style: none; margin: 0; padding: 0; }
+.price-card li { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem 0; border-bottom: 1px dashed var(--line); font-size: .95rem; }
+.price-card li b { white-space: nowrap; font-weight: 700; }
+.price-card p { margin: .7rem 0 0; font-size: .82rem; color: var(--muted); }
+.map { background: var(--plum-deep) url("../img/stock/photo-1578325872347-6cc1795a5fea-1000.jpg") center / cover; }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none; } .reach { background: var(--plum-ink) url("../video/river-aerial.jpg") center / cover; } }

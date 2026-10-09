@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for Cure Spot Pharmacy. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for Cure Spot Pharmacy by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -63,7 +63,7 @@
         </div>
         <div class="hero-visual reveal">
           <figure class="hero-photo">
-            <img src="https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=1200&q=80" alt="Bright, well-organised pharmacy aisle with neatly stocked shelves" width="1200" height="1400">
+            <img src="assets/img/stock/photo-1576602976047-174e57a47881-1200.jpg" alt="Bright, well-organised pharmacy aisle with neatly stocked shelves" width="1200" height="1400">
           </figure>
           <div class="float-card fc-1">
             <span class="fc-icon" aria-hidden="true">💬</span>
@@ -91,8 +91,8 @@
     <section class="section about" id="about">
       <div class="wrap about-grid">
         <div class="about-media reveal">
-          <img class="am-1" src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?auto=format&fit=crop&w=900&q=80" alt="Blister packs of tablets and capsules laid out on a white surface" loading="lazy" width="900" height="900">
-          <img class="am-2" src="https://images.unsplash.com/photo-1611432579699-484f7990b127?auto=format&fit=crop&w=700&q=80" alt="Smiling young African woman with glowing skin" loading="lazy" width="700" height="800">
+          <img class="am-1" src="assets/img/stock/photo-1631549916768-4119b2e5f926-900.jpg" alt="Blister packs of tablets and capsules laid out on a white surface" loading="lazy" width="900" height="900">
+          <img class="am-2" src="assets/img/stock/photo-1611432579699-484f7990b127-700.jpg" alt="Smiling young African woman with glowing skin" loading="lazy" width="700" height="800">
         </div>
         <div class="about-copy reveal">
           <p class="eyebrow">About Cure Spot</p>
@@ -157,6 +157,9 @@
           <h2>Your pharmacy, <em>in your pocket.</em></h2>
           <p>No queues, no guesswork. Chat with us on WhatsApp the same way you'd chat with a friend.</p>
           <a class="btn btn-light btn-lg" href="#contact">Start an order</a>
+          <div class="order-media">
+            <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/pills.jpg" aria-hidden="true"><source src="assets/video/pills.mp4" type="video/mp4"></video>
+          </div>
         </div>
         <ol class="steps">
           <li class="step reveal"><span class="step-n">01</span><div><h3>Message us</h3><p>Send your shopping list, a product photo or your doctor's prescription on WhatsApp.</p></div></li>
@@ -176,25 +179,39 @@
         </header>
         <div class="bento">
           <a class="tile t-big reveal" href="#contact">
-            <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80" alt="Flat lay of makeup and skincare products" loading="lazy">
+            <img src="assets/img/stock/photo-1596462502278-27bfdc403348-1200.jpg" alt="Makeup brushes, lipstick, mascara and a compact powder laid out on a beige background" loading="lazy">
             <span class="tile-label">Beauty &amp; cosmetics</span>
           </a>
           <a class="tile reveal" href="#contact">
-            <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=900&q=80" alt="Assorted colourful tablets and capsules" loading="lazy">
+            <img src="assets/img/stock/photo-1471864190281-a93a3070b6de-900.jpg" alt="Assorted colourful tablets and capsules" loading="lazy">
             <span class="tile-label">Everyday medicines</span>
           </a>
           <a class="tile reveal" href="#contact">
-            <img src="https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=900&q=80" alt="Stethoscope beside a pill organiser and medicines" loading="lazy">
+            <img src="assets/img/stock/photo-1603398938378-e54eab446dde-900.jpg" alt="Stethoscope beside a pill organiser and medicines" loading="lazy">
             <span class="tile-label">Medical supplies</span>
           </a>
           <a class="tile reveal" href="#contact">
-            <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=80" alt="Skincare tube resting on sand beside a cactus" loading="lazy">
+            <img src="assets/img/stock/photo-1617897903246-719242758050-900.jpg" alt="A small dropper bottle of facial oil on a wooden tray beside eucalyptus leaves" loading="lazy">
             <span class="tile-label">Skincare</span>
           </a>
           <a class="tile reveal" href="#contact">
-            <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=900&q=80" alt="Bamboo toothbrushes in a glass on a bright bathroom shelf" loading="lazy">
+            <img src="assets/img/stock/photo-1607613009820-a29f7bb81c04-900.jpg" alt="Bamboo toothbrushes in a glass on a bright bathroom shelf" loading="lazy">
             <span class="tile-label">Personal care</span>
           </a>
+        </div>
+        <div class="essentials reveal" data-placeholder="Sample prices: confirm current shop prices">
+          <div class="essentials-head">
+            <h3>Everyday essentials</h3>
+            <p>All prices in Ugandan shillings (UGX). Sample prices; message us to confirm today's price.</p>
+          </div>
+          <ul class="essentials-list">
+            <li><span>ORS sachet</span><b><span class="cur">UGX</span> 1,000</b></li>
+            <li><span>Digital thermometer</span><b>From <span class="cur">UGX</span> 15,000</b></li>
+            <li><span>Home first-aid kit</span><b>From <span class="cur">UGX</span> 35,000</b></li>
+            <li><span>SPF 50 sunscreen</span><b>From <span class="cur">UGX</span> 40,000</b></li>
+            <li><span>Digital BP monitor</span><b>From <span class="cur">UGX</span> 120,000</b></li>
+            <li><span>Delivery, Bukoto &amp; Kisaasi</span><b>From <span class="cur">UGX</span> 3,000</b></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -242,15 +259,15 @@
         <div class="quotes">
           <figure class="quote reveal" data-placeholder="Replace with a real customer review (with permission)">
             <blockquote>“I sent a photo of my prescription in the morning and everything was ready when I passed by after work. So convenient.”</blockquote>
-            <figcaption>Customer name · <em>Sample review</em></figcaption>
+            <figcaption>Doreen N. · <em>Sample review</em></figcaption>
           </figure>
           <figure class="quote reveal" data-placeholder="Replace with a real customer review (with permission)">
             <blockquote>“They took time to explain how to use my baby's medicine and recommended a gentle lotion that actually works.”</blockquote>
-            <figcaption>Customer name · <em>Sample review</em></figcaption>
+            <figcaption>Patience A. · <em>Sample review</em></figcaption>
           </figure>
           <figure class="quote reveal" data-placeholder="Replace with a real customer review (with permission)">
             <blockquote>“Friendly staff, genuine products and fair prices. My go-to pharmacy in Bukoto.”</blockquote>
-            <figcaption>Customer name · <em>Sample review</em></figcaption>
+            <figcaption>Ivan K. · <em>Sample review</em></figcaption>
           </figure>
         </div>
       </div>
@@ -375,5 +392,5 @@
   </a>
 
   <script src="assets/js/main.js" defer></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

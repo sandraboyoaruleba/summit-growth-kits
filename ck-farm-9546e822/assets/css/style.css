@@ -236,3 +236,11 @@ details p{margin:.7rem 0 0;color:var(--muted)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* Polish pass: video + farm visit panel */
+.together-bg .stock-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.farm-visit{position:relative;margin:0;min-height:420px}
+.farm-visit img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.farm-visit figcaption{position:absolute;left:0;right:0;bottom:0;padding:3rem 1.6rem 1.4rem;color:#fff;background:linear-gradient(transparent,rgba(26,40,20,.88))}
+.farm-visit figcaption b{display:block;font-size:1.2rem;margin-bottom:.2rem}
+@media (prefers-reduced-motion: reduce){.stock-video{display:none}}

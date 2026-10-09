@@ -243,3 +243,10 @@ p { margin: 0 0 1em; }
 .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; } }
+
+/* Polish pass: photos + video */
+.who-card__img { display: block; width: calc(100% + 4.4rem); max-width: none; margin: -2.6rem -2.2rem 1.8rem; aspect-ratio: 4 / 3; object-fit: cover; }
+.who-card__num { margin-bottom: 1rem; }
+.services__img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.services__img img, .services__img .stock-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.05); }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none; } }

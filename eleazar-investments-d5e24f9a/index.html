@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for Eleazar Investments. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for Eleazar Investments by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header">
@@ -52,7 +52,7 @@
       </div>
       <div class="hero-portrait">
         <div class="arch" data-placeholder="Replace stock portrait with a professional photo of Juliet">
-          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1000&q=80" alt="Portrait of a confident Black woman in a white collared shirt against a warm red wall" width="520" height="680">
+          <img src="assets/img/stock/photo-1531123897727-8f129e1688ce-1000.jpg" alt="Portrait of a confident Black woman in a white collared shirt against a warm red wall" width="520" height="680">
         </div>
         <div class="seal" aria-hidden="true">
           <svg viewBox="0 0 140 140"><defs><path id="ring" d="M70 70m-52 0a52 52 0 1 1 104 0a52 52 0 1 1-104 0"/></defs><text><textPath href="#ring">ELEAZAR · “GOD HAS HELPED” · ELEAZAR · </textPath></text></svg>
@@ -71,7 +71,10 @@
 
   <section class="section about" id="about">
     <div class="wrap about-grid">
-      <div class="about-num reveal" aria-hidden="true">E</div>
+      <div class="about-media reveal">
+        <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/notebook.jpg" aria-hidden="true"><source src="assets/video/notebook.mp4" type="video/mp4"></video>
+        <span class="about-e" aria-hidden="true">E</span>
+      </div>
       <div class="reveal">
         <p class="overline">The meaning behind the name</p>
         <h2><em>Eleazar</em> means “God has helped.”</h2>
@@ -104,29 +107,30 @@
       </div>
       <div class="product-grid">
         <article class="product reveal" data-placeholder="Product 1 – name, description, format & price">
-          <div class="cover c1"><span class="tag">Digital guide</span><h3>The Wealth Foundations Guide</h3><span class="mark" aria-hidden="true">E</span></div>
-          <div class="p-body"><p>A step-by-step guide to budgeting, saving and building your first investments.</p><span class="soon">Coming soon</span></div>
+          <div class="cover c1"><img class="cover-img" src="assets/img/stock/photo-1506784983877-45594efa4cbe-600.jpg" alt="A goals planner page beside a cup of black coffee" width="600" height="800" loading="lazy"><span class="tag">Digital guide</span><h3>The Wealth Foundations Guide</h3><span class="mark" aria-hidden="true">E</span></div>
+          <div class="p-body"><p>A step-by-step guide to budgeting, saving and building your first investments.</p><p class="launch-price" data-placeholder="Product 1 launch price (sample amount)">Launch price <b><span class="cur">US$</span> 15</b> <span class="alt">· <span class="cur">UGX</span> 55,000</span></p><span class="soon">Coming soon</span></div>
         </article>
         <article class="product reveal" data-placeholder="Product 2 – name, description, format & price">
-          <div class="cover c2"><span class="tag">Planner</span><h3>The 90-Day Content Planner</h3><span class="mark" aria-hidden="true">E</span></div>
-          <div class="p-body"><p>Plan, batch and schedule a quarter of social media content with ease.</p><span class="soon">Coming soon</span></div>
+          <div class="cover c2"><img class="cover-img" src="assets/img/stock/photo-1632772998001-cc9bf6f7c852-600.jpg" alt="An open monthly planner with coloured pens" width="600" height="800" loading="lazy"><span class="tag">Planner</span><h3>The 90-Day Content Planner</h3><span class="mark" aria-hidden="true">E</span></div>
+          <div class="p-body"><p>Plan, batch and schedule a quarter of social media content with ease.</p><p class="launch-price" data-placeholder="Product 2 launch price (sample amount)">Launch price <b><span class="cur">US$</span> 12</b> <span class="alt">· <span class="cur">UGX</span> 45,000</span></p><span class="soon">Coming soon</span></div>
         </article>
         <article class="product reveal" data-placeholder="Product 3 – name, description, format & price">
-          <div class="cover c3"><span class="tag">Template kit</span><h3>Small Business Starter Kit</h3><span class="mark" aria-hidden="true">E</span></div>
-          <div class="p-body"><p>Ready-to-use templates for pricing, sales tracking and simple bookkeeping.</p><span class="soon">Coming soon</span></div>
+          <div class="cover c3"><img class="cover-img" src="assets/img/stock/photo-1514782831304-632d84503f6f-600.jpg" alt="A weekly planner template on a tablet with a stylus" width="600" height="800" loading="lazy"><span class="tag">Template kit</span><h3>Small Business Starter Kit</h3><span class="mark" aria-hidden="true">E</span></div>
+          <div class="p-body"><p>Ready-to-use templates for pricing, sales tracking and simple bookkeeping.</p><p class="launch-price" data-placeholder="Product 3 launch price (sample amount)">Launch price <b><span class="cur">US$</span> 29</b> <span class="alt">· <span class="cur">UGX</span> 105,000</span></p><span class="soon">Coming soon</span></div>
         </article>
         <article class="product reveal" data-placeholder="Product 4 – name, description, format & price">
-          <div class="cover c4"><span class="tag">Course</span><h3>Purposeful Growth Masterclass</h3><span class="mark" aria-hidden="true">E</span></div>
-          <div class="p-body"><p>A guided video course to set goals, build habits and stay the course.</p><span class="soon">Coming soon</span></div>
+          <div class="cover c4"><img class="cover-img" src="assets/img/stock/photo-1743787038965-f832ae652773-600.jpg" alt="A young Black woman thinking with a pen and notebook outdoors" width="600" height="800" loading="lazy"><span class="tag">Course</span><h3>Purposeful Growth Masterclass</h3><span class="mark" aria-hidden="true">E</span></div>
+          <div class="p-body"><p>A guided video course to set goals, build habits and stay the course.</p><p class="launch-price" data-placeholder="Product 4 launch price (sample amount)">Launch price <b><span class="cur">US$</span> 79</b> <span class="alt">· <span class="cur">UGX</span> 290,000</span></p><span class="soon">Coming soon</span></div>
         </article>
       </div>
+      <p class="price-note reveal" data-placeholder="Confirm launch prices in US$ and UGX">Prices in US dollars (US$) and Ugandan shillings (UGX). Sample launch prices for this demo; final prices confirmed at launch.</p>
     </div>
   </section>
 
   <section class="section how">
     <div class="wrap how-grid">
       <div class="how-img reveal">
-        <img src="https://images.unsplash.com/photo-1604933762021-54a5858c9832?auto=format&fit=crop&w=900&q=80" alt="A woman with long braids working on a laptop at a bright desk" loading="lazy">
+        <img src="assets/img/stock/photo-1604933762021-54a5858c9832-900.jpg" alt="A woman with long braids working on a laptop at a bright desk" loading="lazy">
       </div>
       <div class="reveal">
         <p class="overline">How it works</p>
@@ -148,10 +152,10 @@
         <p class="sub">Daily inspiration and practical tips on social media, with first looks at every new product.</p>
       </div>
       <div class="j-grid">
-        <img class="reveal" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=700&q=80" alt="Hands writing in a notebook beside a laptop" loading="lazy">
-        <img class="reveal" src="https://images.unsplash.com/photo-1615891081220-9116de3e1afd?auto=format&fit=crop&w=700&q=80" alt="Smiling young Black woman working on a laptop in a cafe" loading="lazy">
-        <img class="reveal" src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&w=700&q=80" alt="Minimal workspace with laptop and desktop screen" loading="lazy">
-        <img class="reveal" src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?auto=format&fit=crop&w=700&q=80" alt="Black woman with natural curls looking up thoughtfully in the city" loading="lazy">
+        <img class="reveal" src="assets/img/stock/photo-1434030216411-0b793f4b4173-700.jpg" alt="Hands writing in a notebook beside a laptop" loading="lazy">
+        <img class="reveal" src="assets/img/stock/photo-1615891081220-9116de3e1afd-700.jpg" alt="Smiling young Black woman working on a laptop in a cafe" loading="lazy">
+        <img class="reveal" src="assets/img/stock/photo-1499951360447-b19be8fe80f5-700.jpg" alt="Minimal workspace with laptop and desktop screen" loading="lazy">
+        <img class="reveal" src="assets/img/stock/photo-1589156280159-27698a70f29e-700.jpg" alt="Black woman with natural curls looking up thoughtfully in the city" loading="lazy">
       </div>
       <div class="socials reveal" data-placeholder="Social media handles / links (Instagram, TikTok, Facebook, YouTube)">
         <a href="#" aria-label="Instagram (link coming soon)">Instagram</a>
@@ -166,7 +170,7 @@
     <div class="wrap">
       <figure class="quote reveal" data-placeholder="Sample testimonial – replace with real customer feedback after launch">
         <blockquote>“Clear, beautiful and actually useful. It felt like having a mentor in my pocket.”</blockquote>
-        <figcaption>Early reader · Sample review</figcaption>
+        <figcaption>Amina R. · Early reader, Boston · Sample review</figcaption>
       </figure>
     </div>
   </section>
@@ -200,7 +204,7 @@
       <div>
         <details class="reveal"><summary>When do the products launch?</summary><p data-placeholder="Launch date">The first collection is in its final stages. Join the waitlist and you’ll hear first.</p></details>
         <details class="reveal"><summary>Are these physical or digital?</summary><p>Everything is digital: downloadable guides, printable planners, editable templates and online courses you can use anywhere in the world.</p></details>
-        <details class="reveal"><summary>Can I pay from Uganda?</summary><p data-placeholder="Payment methods by country">Yes. We are setting up checkout options for customers in both the USA and East Africa.</p></details>
+        <details class="reveal"><summary>Can I pay from Uganda?</summary><p data-placeholder="Payment methods by country">Yes. We are setting up checkout options for customers in both the USA and East Africa, with every price shown in US dollars (US$) and Ugandan shillings (UGX).</p></details>
         <details class="reveal"><summary>Is this financial advice?</summary><p>Our resources are educational and designed to build good habits and understanding. For decisions about your specific situation, please consult a licensed professional.</p></details>
       </div>
     </div>
@@ -220,5 +224,5 @@
 </a>
 
 <script src="assets/js/main.js"></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

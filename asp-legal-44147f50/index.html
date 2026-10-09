@@ -17,9 +17,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/main.js" defer></script>
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for ASP · Legal Services. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for ASP · Legal Services by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -57,7 +56,7 @@
         </div>
         <div class="hero-art reveal">
           <figure>
-            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80" alt="A bronze statue of Lady Justice holding scales" width="1000" height="1250" fetchpriority="high">
+            <img src="assets/img/stock/photo-1589829545856-d10d557cf95f-1000.jpg" alt="A bronze statue of Lady Justice holding scales" width="1000" height="1250" fetchpriority="high">
           </figure>
           <blockquote class="hero-quote">“Good counsel prevents what litigation can only repair.”</blockquote>
         </div>
@@ -87,12 +86,19 @@
           <li class="reveal"><span class="roman">07</span><div><h3>Family &amp; Succession</h3><p>Wills, estate administration, marriage, divorce and custody matters handled with discretion.</p></div></li>
           <li class="reveal"><span class="roman">08</span><div><h3>NGOs &amp; Regulatory</h3><p>Registration, governance and regulatory compliance for organisations and enterprises.</p></div></li>
         </ol>
+        <div class="practice-gallery">
+          <figure class="reveal"><img src="assets/img/stock/photo-1653566031535-bcf33e1c2893-900.jpg" alt="A team of African professionals discussing business around a meeting table" width="900" height="675" loading="lazy"><figcaption>Business &amp; corporate advice</figcaption></figure>
+          <figure class="reveal"><img src="assets/img/stock/photo-1767972463877-b64ba4283cd0-900.jpg" alt="A wooden judge's gavel resting beside a closed book on a dark desk" width="900" height="675" loading="lazy"><figcaption>Litigation &amp; dispute resolution</figcaption></figure>
+          <figure class="reveal"><img src="assets/img/stock/photo-1675756261486-09bd1e0f6c8a-900.jpg" alt="Kampala city skyline and green hills under a bright blue sky" width="900" height="675" loading="lazy"><figcaption>Rooted in Kampala, serving Uganda</figcaption></figure>
+        </div>
       </div>
     </section>
 
     <!-- QUOTE BAND -->
     <section class="band">
       <div class="band-img" role="img" aria-label="Rows of leather-bound law books on library shelves"></div>
+      <video class="stock-video band-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/signing.jpg" aria-hidden="true"><source src="assets/video/signing.mp4" type="video/mp4"></video>
+      <div class="band-shade" aria-hidden="true"></div>
       <div class="container band-inner reveal">
         <p>Every client deserves to understand their position, their options and the likely road ahead, <em>before</em> they decide.</p>
       </div>
@@ -111,24 +117,25 @@
             <p class="plan-tier">Essential</p>
             <h3>For startups &amp; SMEs</h3>
             <ul><li>Telephone &amp; email legal advice</li><li>Review of standard contracts</li><li>Compliance reminders</li><li>Priority consultation booking</li></ul>
-            <p class="price" data-placeholder="Essential retainer monthly fee">Fixed monthly fee · quote on request</p>
+            <p class="price" data-placeholder="Essential retainer monthly fee (sample amount)">From <span class="cur">UGX</span> 500,000 <small>/ month</small></p>
             <a class="btn btn-line-dark" href="#contact">Enquire</a>
           </article>
           <article class="plan featured reveal">
             <p class="plan-tier">Business</p>
             <h3>For growing companies</h3>
             <ul><li>Everything in Essential</li><li>Contract drafting &amp; negotiation</li><li>Employment &amp; HR support</li><li>Demand letters &amp; debt recovery</li><li>Quarterly legal health check</li></ul>
-            <p class="price" data-placeholder="Business retainer monthly fee">Fixed monthly fee · quote on request</p>
+            <p class="price" data-placeholder="Business retainer monthly fee (sample amount)">From <span class="cur">UGX</span> 1,200,000 <small>/ month</small></p>
             <a class="btn btn-brass" href="#contact">Enquire</a>
           </article>
           <article class="plan reveal">
             <p class="plan-tier">Corporate</p>
             <h3>For established organisations</h3>
             <ul><li>Everything in Business</li><li>Board &amp; governance advisory</li><li>Regulatory compliance support</li><li>Preferential litigation rates</li></ul>
-            <p class="price" data-placeholder="Corporate retainer monthly fee">Tailored to your needs</p>
+            <p class="price" data-placeholder="Corporate retainer monthly fee (sample amount)">From <span class="cur">UGX</span> 2,500,000 <small>/ month · tailored</small></p>
             <a class="btn btn-line-dark" href="#contact">Enquire</a>
           </article>
         </div>
+        <p class="price-note reveal" data-placeholder="Confirm retainer fees and currency">All fees in Ugandan shillings (UGX), exclusive of VAT and court or filing costs. Sample figures for this demo; your exact fee is agreed in writing upfront.</p>
       </div>
     </section>
 
@@ -152,10 +159,10 @@
     <!-- PRINCIPAL -->
     <section class="section principal" id="principal">
       <div class="container principal-grid">
-        <div class="portrait reveal" aria-hidden="true">
-          <div class="mono">HA</div>
-          <p data-placeholder="Professional photo of Harriet Acham">Portrait to come</p>
-        </div>
+        <figure class="portrait has-photo reveal">
+          <img src="assets/img/stock/photo-1573496267526-08a69e46a409-1000.jpg" alt="Two African women professionals in a consultation, taking notes at a bright office table" width="1000" height="667" loading="lazy">
+          <figcaption data-placeholder="Professional photo of Harriet Acham / the ASP team"><span class="mono-badge">HA</span>Illustrative photo · team portrait to come</figcaption>
+        </figure>
         <div class="reveal">
           <p class="overline dark"><span></span>The firm</p>
           <h2>Personal attention from a dedicated legal team</h2>
@@ -179,9 +186,9 @@
           <p class="note">Sample reviews for this demo, to be replaced with real client feedback (with permission).</p>
         </div>
         <div class="quotes">
-          <figure class="reveal" data-placeholder="Real client testimonial #1"><blockquote>“ASP reviewed our supplier contracts and spotted risks we had missed for years. Practical, fast and clear.”</blockquote><figcaption>Client name · Managing Director · Sample review</figcaption></figure>
-          <figure class="reveal" data-placeholder="Real client testimonial #2"><blockquote>“During a difficult land dispute I always knew where things stood. Professional and genuinely caring.”</blockquote><figcaption>Client name · Individual client · Sample review</figcaption></figure>
-          <figure class="reveal" data-placeholder="Real client testimonial #3"><blockquote>“The retainer means our HR questions get answered before they become problems. Worth every shilling.”</blockquote><figcaption>Client name · Operations Lead · Sample review</figcaption></figure>
+          <figure class="reveal" data-placeholder="Real client testimonial #1"><blockquote>“ASP reviewed our supplier contracts and spotted risks we had missed for years. Practical, fast and clear.”</blockquote><figcaption>Daniel K. · Managing Director · Sample review</figcaption></figure>
+          <figure class="reveal" data-placeholder="Real client testimonial #2"><blockquote>“During a difficult land dispute I always knew where things stood. Professional and genuinely caring.”</blockquote><figcaption>Grace N. · Individual client · Sample review</figcaption></figure>
+          <figure class="reveal" data-placeholder="Real client testimonial #3"><blockquote>“The retainer means our HR questions get answered before they become problems. Worth every shilling.”</blockquote><figcaption>Brian M. · Operations Lead · Sample review</figcaption></figure>
         </div>
       </div>
     </section>
@@ -243,5 +250,6 @@
   <a class="msg-float" href="#contact" aria-label="Request a consultation">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
   </a>
-</body>
+<script src="assets/js/main.js" defer></script>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

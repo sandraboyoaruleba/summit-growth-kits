@@ -268,3 +268,12 @@ p{margin:0 0 1em}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* polish pass: currency + made-by-hand video */
+.cur{font-size:.8em;letter-spacing:.04em;margin-right:.1em}
+.made-video{position:relative;margin:0 0 2rem;border:4px solid var(--butter);border-radius:var(--r);overflow:hidden;aspect-ratio:21/8;background:var(--choc-2)}
+.made-video .stock-video,.made-video .made-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.made-video .made-fallback{display:none}
+.made-video figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.4rem 1.4rem 1rem;background:linear-gradient(0deg,rgba(43,24,16,.85),rgba(43,24,16,0));color:var(--cream);font-weight:700;font-size:clamp(1rem,.9rem + .5vw,1.25rem)}
+@media (max-width:640px){.made-video{aspect-ratio:4/3}}
+@media (prefers-reduced-motion: reduce){ .stock-video{display:none} .made-video .made-fallback{display:block} }

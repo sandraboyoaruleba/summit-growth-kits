@@ -254,3 +254,10 @@ legend{font-weight:800;margin-bottom:.5rem;font-size:.92rem}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* currency label + stock video (polish pass) */
+.cur{font-size:.78em;font-weight:800;letter-spacing:.04em;margin-right:.1em}
+.visit-art{position:relative;isolation:isolate;min-height:320px}
+.visit-art .stock-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.visit-art::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(255,91,46,.05) 0%,rgba(255,91,46,.55) 45%,var(--orange) 78%)}
+@media (prefers-reduced-motion: reduce){ .stock-video{display:none} .visit-art{background:var(--orange) url(../video/shoe-shelf.jpg) center/cover} }

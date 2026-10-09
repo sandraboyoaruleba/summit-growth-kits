@@ -17,8 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>document.documentElement.classList.add('js')</script>
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for Adis Yields. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for Adis Yields by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="header" id="top">
@@ -59,11 +59,11 @@
       </div>
       <div class="hero__art">
         <div class="egg-frame">
-          <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=1200&q=80" alt="A full tray of fresh brown chicken eggs in a moulded carton" width="900" height="1100">
+          <img src="assets/img/stock/photo-1506976785307-8732e854ad03-1200.jpg" alt="A full tray of fresh brown chicken eggs in a moulded carton" width="900" height="1100">
         </div>
         <div class="badge badge--sun" aria-hidden="true"><span>Fresh<br>today</span></div>
         <div class="hero__card">
-          <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=300&q=70" alt="A healthy brown laying hen" width="64" height="64">
+          <img src="assets/img/stock/photo-1548550023-2bdb3c5beed7-300.jpg" alt="A healthy brown laying hen" width="64" height="64">
           <div><b>Healthy hens, honest eggs</b><span>Well fed, well housed, well cared for.</span></div>
         </div>
       </div>
@@ -80,8 +80,8 @@
   <section class="section farm" id="farm">
     <div class="wrap farm__grid">
       <div class="farm__photos reveal">
-        <img class="p1" src="https://images.unsplash.com/photo-1737652384220-078e824d5af7?auto=format&fit=crop&w=900&q=80" alt="A smiling young African woman holding a brown hen on a farm" width="600" height="760">
-        <img class="p2" src="https://images.unsplash.com/photo-1441122456239-401e92b73c65?auto=format&fit=crop&w=700&q=80" alt="A flock of brown laying hens inside a poultry house" width="420" height="320">
+        <img class="p1" src="assets/img/stock/photo-1737652384220-078e824d5af7-900.jpg" alt="A smiling young African woman holding a brown hen on a farm" width="600" height="760">
+        <img class="p2" src="assets/img/stock/photo-1441122456239-401e92b73c65-700.jpg" alt="A flock of brown laying hens inside a poultry house" width="420" height="320">
       </div>
       <div class="farm__copy reveal">
         <p class="eyebrow">Our farm</p>
@@ -156,18 +156,19 @@
   <section class="section products">
     <div class="wrap products__grid">
       <div class="products__img reveal">
-        <img src="https://images.unsplash.com/photo-1561621798-2a92b970226b?auto=format&fit=crop&w=1000&q=80" alt="Fresh brown eggs in a cardboard egg tray" width="700" height="700">
+        <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/hen-eggs.jpg" aria-hidden="true"><source src="assets/video/hen-eggs.mp4" type="video/mp4"></video>
+        <img class="video-fallback" src="assets/img/stock/photo-1561621798-2a92b970226b-1000.jpg" alt="Fresh brown eggs in a cardboard egg tray" width="700" height="700">
       </div>
       <div class="reveal">
         <p class="eyebrow">What we sell</p>
         <h2>Simple products. Serious freshness.</h2>
         <ul class="price-list">
-          <li><div><b>Fresh table eggs · 1 crate</b><span>30 eggs, for homes &amp; small shops</span></div><em data-placeholder="Retail price per crate">UGX 13,000</em></li>
+          <li><div><b>Fresh table eggs · 1 crate</b><span>30 eggs, for homes &amp; small shops</span></div><em data-placeholder="Retail price per crate"><span class="cur">UGX</span> 13,000</em></li>
           <li><div><b>Wholesale · 10+ crates</b><span>For wholesalers, retailers &amp; supermarkets</span></div><em data-placeholder="Wholesale price per crate">Ask for price</em></li>
           <li><div><b>Institutional supply</b><span>Weekly / termly orders for schools</span></div><em data-placeholder="Institutional pricing">Quoted per term</em></li>
           <li><div><b>Delivery</b><span data-placeholder="Delivery coverage area">Kampala &amp; surrounding areas</span></div><em data-placeholder="Delivery fee policy">Free on bulk orders</em></li>
         </ul>
-        <p class="note">Egg prices in Uganda move with feed costs and season. Message us for today's price.</p>
+        <p class="note">All prices in Ugandan shillings (UGX). Egg prices in Uganda move with feed costs and season. Message us for today's price.</p>
       </div>
     </div>
   </section>
@@ -191,11 +192,11 @@
   <!-- GALLERY -->
   <section class="gallery" aria-label="Gallery">
     <div class="gallery__track">
-      <img src="https://images.unsplash.com/photo-1556316918-880f9e893822?auto=format&fit=crop&w=800&q=75" alt="Brown hens standing together by a farm fence" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1498654077810-12c21d4d6dc3?auto=format&fit=crop&w=800&q=75" alt="Close-up of brown eggs in an egg tray" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1737652384227-d7858678edac?auto=format&fit=crop&w=800&q=75" alt="An African woman farmer holding a hen" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1718343511741-a4b0ef2e6258?auto=format&fit=crop&w=800&q=75" alt="Chickens walking around a dirt farmyard" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1535275226173-7ee8b465f0c1?auto=format&fit=crop&w=800&q=75" alt="Hens and a rooster foraging on green grass" loading="lazy">
+      <img src="assets/img/stock/photo-1556316918-880f9e893822-800.jpg" alt="Brown hens standing together by a farm fence" loading="lazy">
+      <img src="assets/img/stock/photo-1498654077810-12c21d4d6dc3-800.jpg" alt="Close-up of brown eggs in an egg tray" loading="lazy">
+      <img src="assets/img/stock/photo-1737652384227-d7858678edac-800.jpg" alt="An African woman farmer holding a hen" loading="lazy">
+      <img src="assets/img/stock/photo-1718343511741-a4b0ef2e6258-800.jpg" alt="Chickens walking around a dirt farmyard" loading="lazy">
+      <img src="assets/img/stock/photo-1535275226173-7ee8b465f0c1-800.jpg" alt="Hens and a rooster foraging on green grass" loading="lazy">
     </div>
   </section>
 
@@ -209,15 +210,15 @@
       <div class="quotes">
         <figure class="quote reveal" data-placeholder="Replace with a real customer review">
           <blockquote>“Our learners eat eggs twice a week and the crates always arrive on time. Very few cracked eggs.”</blockquote>
-          <figcaption>School bursar · <span>Sample review</span></figcaption>
+          <figcaption>Sarah N., school bursar · <span>Sample review</span></figcaption>
         </figure>
         <figure class="quote reveal" data-placeholder="Replace with a real customer review">
           <blockquote>“Customers can tell the difference. The eggs are fresh and the yolks are a lovely colour.”</blockquote>
-          <figcaption>Shop owner · <span>Sample review</span></figcaption>
+          <figcaption>Joseph K., shop owner · <span>Sample review</span></figcaption>
         </figure>
         <figure class="quote reveal" data-placeholder="Replace with a real customer review">
           <blockquote>“I order a crate every week for the family. Easy on WhatsApp and always fresh.”</blockquote>
-          <figcaption>Home customer · <span>Sample review</span></figcaption>
+          <figcaption>Grace A., home customer · <span>Sample review</span></figcaption>
         </figure>
       </div>
     </div>
@@ -306,5 +307,5 @@
 <a class="wa-float" href="https://wa.me/256751158666?text=Hello%20Adis%20Yields%2C%20I%27d%20like%20to%20order%20eggs." target="_blank" rel="noopener" aria-label="Order on WhatsApp"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 5 5 0 0 0 1 2.6 11 11 0 0 0 4.3 3.8c1.6.7 2.2.7 3 .6a2.5 2.5 0 0 0 1.7-1.2 2 2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg></a>
 
 <script src="assets/js/main.js"></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

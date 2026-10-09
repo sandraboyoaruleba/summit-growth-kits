@@ -17,8 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for Atamba · Dr. Caroline Nerima. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for Atamba · Dr. Caroline Nerima by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header" id="top">
@@ -58,7 +58,7 @@
       </div>
       <div class="hero-art reveal">
         <figure class="arch">
-          <img src="https://images.unsplash.com/photo-1591451855781-9eb0f9726a33?auto=format&fit=crop&w=1100&q=80" alt="A smiling mother holding her curious baby close at home" width="560" height="700">
+          <img src="assets/img/stock/photo-1591451855781-9eb0f9726a33-1100.jpg" alt="A smiling mother holding her curious baby close at home" width="560" height="700">
         </figure>
         <div class="float-card fc-1">
           <span class="fc-icon" aria-hidden="true">&#9825;</span>
@@ -84,7 +84,7 @@
   <section class="about section" id="about">
     <div class="wrap about-grid">
       <div class="about-photo reveal">
-        <img src="https://images.unsplash.com/photo-1679108853755-10a20562ec61?auto=format&fit=crop&w=1000&q=80" alt="A smiling mother holding her young daughter outdoors" loading="lazy" width="520" height="620">
+        <img src="assets/img/stock/photo-1679108853755-10a20562ec61-1000.jpg" alt="A smiling mother holding her young daughter outdoors" loading="lazy" width="520" height="620">
         <p class="photo-note" data-placeholder="Replace with a real portrait of Dr. Caroline Nerima">Portrait of Dr. Nerima coming soon</p>
       </div>
       <div class="about-copy reveal">
@@ -213,6 +213,11 @@
         <li class="reveal"><span class="num">3</span><h3>Play-based assessment</h3><p>Your child plays, moves and talks while Dr. Nerima observes. You stay with your child throughout.</p></li>
         <li class="reveal"><span class="num">4</span><h3>A clear plan</h3><p>Findings explained in plain words, a written summary, next steps, referrals and follow-up you can count on.</p></li>
       </ol>
+      <figure class="visit-media reveal">
+        <img class="video-fallback" src="assets/video/play-assessment.jpg" alt="A father and his young son playing with a colourful counting toy on the floor" loading="lazy">
+        <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/play-assessment.jpg" aria-hidden="true"><source src="assets/video/play-assessment.mp4" type="video/mp4"></video>
+        <figcaption><strong>Play is how we learn about your child.</strong> Toys, puzzles and everyday games show us how your child moves, thinks and communicates, while you stay right beside them.</figcaption>
+      </figure>
       <div class="bring reveal">
         <h3>Helpful to bring</h3>
         <ul>
@@ -228,9 +233,9 @@
   <!-- GALLERY / VALUES -->
   <section class="values section">
     <div class="wrap values-grid">
-      <figure class="vg vg-1 reveal"><img src="https://images.unsplash.com/photo-1735792339621-2846f164b78f?auto=format&fit=crop&w=900&q=80" alt="A mother in a yellow top smiling at her young son" loading="lazy"></figure>
-      <figure class="vg vg-2 reveal"><img src="https://images.unsplash.com/photo-1485110168560-69d4ac37b23e?auto=format&fit=crop&w=900&q=80" alt="A young boy crouching on grass with a football" loading="lazy"></figure>
-      <figure class="vg vg-3 reveal"><img src="https://images.unsplash.com/photo-1761234852163-23f2ededd04e?auto=format&fit=crop&w=900&q=80" alt="A nurse in green scrubs gently comforting a young girl on a sofa" loading="lazy"></figure>
+      <figure class="vg vg-1 reveal"><img src="assets/img/stock/photo-1735792339621-2846f164b78f-900.jpg" alt="A mother in a yellow top smiling at her young son" loading="lazy"></figure>
+      <figure class="vg vg-2 reveal"><img src="assets/img/stock/photo-1485110168560-69d4ac37b23e-900.jpg" alt="A young boy crouching on grass with a football" loading="lazy"></figure>
+      <figure class="vg vg-3 reveal"><img src="assets/img/stock/photo-1761234852163-23f2ededd04e-900.jpg" alt="A nurse in green scrubs gently comforting a young girl on a sofa" loading="lazy"></figure>
       <div class="values-copy reveal">
         <p class="eyebrow">What we believe</p>
         <h2>Strengths first. Families always.</h2>
@@ -241,7 +246,7 @@
           <li><strong>Joined-up care.</strong> We work with therapists, schools and your family doctor.</li>
         </ul>
       </div>
-      <figure class="vg vg-4 reveal"><img src="https://images.unsplash.com/photo-1736205360390-024ab4d248bd?auto=format&fit=crop&w=900&q=80" alt="A smiling young girl with her hands on her head" loading="lazy"></figure>
+      <figure class="vg vg-4 reveal"><img src="assets/img/stock/photo-1736205360390-024ab4d248bd-900.jpg" alt="A smiling young girl with her hands on her head" loading="lazy"></figure>
     </div>
   </section>
 
@@ -256,11 +261,11 @@
       <div class="voice-grid">
         <figure class="voice reveal" data-placeholder="Sample review — replace with a real parent testimonial (with permission)">
           <blockquote>&ldquo;For the first time, someone explained what was happening with our son without rushing us. We left with a plan and with hope.&rdquo;</blockquote>
-          <figcaption>Parent of a 3-year-old &middot; Sample review</figcaption>
+          <figcaption>Grace, parent of a 3-year-old &middot; Sample review</figcaption>
         </figure>
         <figure class="voice reveal" data-placeholder="Sample review — replace with a real parent testimonial (with permission)">
           <blockquote>&ldquo;The home activities she showed us made such a difference. Our daughter now says her first words.&rdquo;</blockquote>
-          <figcaption>Parent &middot; Sample review</figcaption>
+          <figcaption>Brian, parent of a 2-year-old &middot; Sample review</figcaption>
         </figure>
         <figure class="voice reveal" data-placeholder="Sample review — replace with a real referring-clinician testimonial">
           <blockquote>&ldquo;I refer children with complex developmental needs with complete confidence.&rdquo;</blockquote>
@@ -344,5 +349,5 @@
 </a>
 
 <script src="assets/js/main.js"></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

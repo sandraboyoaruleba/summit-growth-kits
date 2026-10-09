@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for TaskmateUg. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for TaskmateUg by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -56,7 +56,7 @@
         </div>
         <div class="hero-visual reveal">
           <div class="photo-frame">
-            <img src="https://images.unsplash.com/photo-1573497161161-c3e73707e25c?auto=format&fit=crop&w=1000&q=80" alt="Smiling professional African woman in glasses ready to help" width="1000" height="1100">
+            <img src="assets/img/stock/photo-1573497161161-c3e73707e25c-1000.jpg" alt="Smiling professional African woman in glasses ready to help" width="1000" height="1100">
           </div>
           <div class="todo" aria-label="Example task list">
             <p class="todo-head"><span>Today's tasks</span><span class="todo-badge">4/5 done</span></p>
@@ -82,13 +82,21 @@
     <!-- PROBLEM -->
     <section class="section intro">
       <div class="wrap intro-grid">
-        <h2 class="reveal">Sound familiar?</h2>
+        <div class="intro-head reveal">
+          <h2>Sound familiar?</h2>
+          <figure class="intro-video">
+            <img src="assets/video/office.jpg" alt="A business owner in shirt and tie working through tasks at his computer" loading="lazy">
+            <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/office.jpg" aria-hidden="true"><source src="assets/video/office.mp4" type="video/mp4"></video>
+          </figure>
+        </div>
+        <div class="intro-body">
         <div class="pains reveal">
           <p>“I'm so busy serving customers that my Instagram hasn't been updated in weeks.”</p>
           <p>“Paperwork, receipts and emails pile up every Friday.”</p>
           <p>“I lose half a day in traffic just to run one errand.”</p>
         </div>
         <p class="intro-answer reveal">That's exactly why Taskmate exists. Hand us the jobs that drain your time, and get back to the work only <em>you</em> can do.</p>
+        </div>
       </div>
     </section>
 
@@ -107,7 +115,7 @@
             <ul class="chips"><li>Inbox</li><li>Invoices</li><li>Spreadsheets</li></ul>
           </article>
           <article class="b b-2 reveal">
-            <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=900&q=80" alt="Smartphone showing a social media feed" loading="lazy">
+            <img src="assets/img/stock/photo-1586953208448-b95a79798f07-900.jpg" alt="Smartphone showing a social media feed" loading="lazy">
             <div class="b-over">
               <span class="b-num">02</span>
               <h3>Social media management</h3>
@@ -131,7 +139,7 @@
             <p>Deliveries, pickups, bank &amp; office runs, purchases and paperwork drop-offs around town.</p>
           </article>
           <article class="b b-6 reveal">
-            <img src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=900&q=80" alt="Smiling young African man, friendly and approachable" loading="lazy">
+            <img src="assets/img/stock/photo-1522529599102-193c0d76b5b6-900.jpg" alt="Smiling young African man, friendly and approachable" loading="lazy">
             <div class="b-over">
               <span class="b-num">06</span>
               <h3>Personal assistance</h3>
@@ -165,6 +173,7 @@
           <p class="kicker">Plans</p>
           <h2>Flexible support that <span class="hl">fits your budget</span></h2>
           <p class="sub">Start small with a single task, or get a dedicated Taskmate every month.</p>
+          <p class="cur-note">All prices in Ugandan shillings (UGX).</p>
         </header>
         <div class="plan-grid">
           <article class="plan reveal">
@@ -197,7 +206,7 @@
     <section class="section why">
       <div class="wrap why-grid">
         <div class="why-media reveal">
-          <img src="https://images.unsplash.com/photo-1573165231977-3f0e27806045?auto=format&fit=crop&w=1000&q=80" alt="Team of professionals, including African women, in a bright meeting room" loading="lazy">
+          <img src="assets/img/stock/photo-1531482615713-2afd69097998-1000.jpg" alt="A team of young African professionals working together at laptops" loading="lazy">
         </div>
         <div class="reveal">
           <p class="kicker">Why Taskmate</p>
@@ -222,11 +231,11 @@
         <div class="quotes">
           <figure class="quote reveal" data-placeholder="Replace with a real client review (with permission)">
             <blockquote>“They took over our Instagram and WhatsApp replies. For the first time in months I can focus on the shop.”</blockquote>
-            <figcaption><b>Client name</b> · Business owner · <i>Sample review</i></figcaption>
+            <figcaption><b>Juliet N.</b> · Boutique owner, Kampala · <i>Sample review</i></figcaption>
           </figure>
           <figure class="quote reveal" data-placeholder="Replace with a real client review (with permission)">
             <blockquote>“Errands that used to cost me a whole afternoon are now handled with a single message.”</blockquote>
-            <figcaption><b>Client name</b> · Entrepreneur · <i>Sample review</i></figcaption>
+            <figcaption><b>Isaac M.</b> · Entrepreneur, Ntinda · <i>Sample review</i></figcaption>
           </figure>
         </div>
       </div>
@@ -294,5 +303,5 @@
   </a>
 
   <script src="assets/js/main.js" defer></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

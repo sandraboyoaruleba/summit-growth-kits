@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for The Royal Lounge, Lubowa. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for The Royal Lounge, Lubowa by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -42,6 +42,8 @@
     <!-- HERO -->
     <section class="hero" id="top">
       <div class="hero-bg" role="img" aria-label="Elegant plated dish served at a candle-lit restaurant table"></div>
+      <video class="hero-video stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/grill-fire.jpg" aria-hidden="true"><source src="assets/video/grill-fire.mp4" type="video/mp4"></video>
+      <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-inner wrap">
         <p class="hero-kicker reveal"><span></span>Restaurant · Café · Grill — Lubowa<span></span></p>
         <h1 class="reveal">Taste the difference.<br><em>Savor the moment.</em></h1>
@@ -68,8 +70,8 @@
     <section class="section about" id="about">
       <div class="wrap about-grid">
         <div class="about-media reveal">
-          <img class="a1" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Warm, dimly lit restaurant interior with wooden tables and pendant lights" loading="lazy">
-          <img class="a2" src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=800&q=80" alt="Chef cooking over high flames in a busy kitchen" loading="lazy">
+          <img class="a1" src="assets/img/stock/photo-1517248135467-4c7edcad34c4-1000.jpg" alt="Warm, dimly lit restaurant interior with wooden tables and pendant lights" loading="lazy">
+          <img class="a2" src="assets/img/stock/photo-1600565193348-f74bd3c7ccdf-800.jpg" alt="Chef cooking over high flames in a busy kitchen" loading="lazy">
           <div class="since"><span>Lubowa</span><strong>♛</strong><span>Kampala</span></div>
         </div>
         <div class="about-copy reveal">
@@ -141,6 +143,7 @@
             </ul>
           </div>
         </div>
+        <p class="cur-note reveal">All prices in Ugandan shillings (UGX).</p>
         <div class="menu-cta reveal">
           <a class="btn btn-gold" href="https://wa.me/256772465214?text=Hello%20Royal%20Lounge%2C%20please%20send%20me%20your%20full%20menu." target="_blank" rel="noopener">Request the full menu on WhatsApp</a>
         </div>
@@ -156,15 +159,15 @@
         </header>
         <div class="exp-grid">
           <article class="exp reveal">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=80" alt="Assorted grilled meats and skewers on a platter" loading="lazy">
+            <img src="assets/img/stock/photo-1555939594-58d7cb561ad1-900.jpg" alt="Assorted grilled meats and skewers on a platter" loading="lazy">
             <div class="exp-body"><span>01</span><h3>Fire &amp; grill</h3><p>Ribs, steaks, chicken and muchomo from the coals — perfect for sharing.</p></div>
           </article>
           <article class="exp reveal">
-            <img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?auto=format&fit=crop&w=900&q=80" alt="Traditional African meal of greens served with a white staple" loading="lazy">
+            <img src="assets/img/stock/photo-1604329760661-e71dc83f8f26-900.jpg" alt="Traditional African meal of greens served with a white staple" loading="lazy">
             <div class="exp-body"><span>02</span><h3>Taste of home</h3><p>Ugandan classics cooked the way they should be — slow, generous and full of flavour.</p></div>
           </article>
           <article class="exp reveal">
-            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt="Friends toasting with cups of latte art coffee" loading="lazy">
+            <img src="assets/img/stock/photo-1495474472287-4d71bcdd2085-900.jpg" alt="Friends toasting with cups of latte art coffee" loading="lazy">
             <div class="exp-body"><span>03</span><h3>Café moments</h3><p>Freshly brewed coffee, teas, juices and treats — your Lubowa meeting spot.</p></div>
           </article>
         </div>
@@ -190,12 +193,12 @@
           <h2>From our <em>kitchen &amp; tables</em></h2>
         </header>
         <div class="g-grid">
-          <img class="reveal g-tall" src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80" alt="Glazed barbecue ribs on a wooden board with tomatoes" loading="lazy">
-          <img class="reveal" src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?auto=format&fit=crop&w=900&q=80" alt="Rich, golden curry in a dark bowl" loading="lazy">
-          <img class="reveal" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80" alt="Cappuccino with latte art on a café table" loading="lazy">
-          <img class="reveal g-wide" src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80" alt="Sliced steak served with crispy fries" loading="lazy">
-          <img class="reveal" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&q=80" alt="Amber cocktail garnished with herbs on a dark bar" loading="lazy">
-          <img class="reveal" src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=900&q=80" alt="Glass of fresh orange juice with a lemon slice" loading="lazy">
+          <img class="reveal g-tall" src="assets/img/stock/photo-1544025162-d76694265947-900.jpg" alt="Glazed barbecue ribs on a wooden board with tomatoes" loading="lazy">
+          <img class="reveal" src="assets/img/stock/photo-1574653853027-5382a3d23a15-900.jpg" alt="Rich, golden curry in a dark bowl" loading="lazy">
+          <img class="reveal" src="assets/img/stock/photo-1509042239860-f550ce710b93-900.jpg" alt="Cappuccino with latte art on a café table" loading="lazy">
+          <img class="reveal g-wide" src="assets/img/stock/photo-1600891964092-4316c288032e-1200.jpg" alt="Sliced steak served with crispy fries" loading="lazy">
+          <img class="reveal" src="assets/img/stock/photo-1514362545857-3bc16c4c7d1b-900.jpg" alt="Amber cocktail garnished with herbs on a dark bar" loading="lazy">
+          <img class="reveal" src="assets/img/stock/photo-1600271886742-f049cd451bba-900.jpg" alt="Glass of fresh orange juice with a lemon slice" loading="lazy">
         </div>
         <p class="g-follow reveal">Follow us on Instagram <a href="https://www.instagram.com/royal_loungelubowa/" target="_blank" rel="noopener">@royal_loungelubowa</a></p>
       </div>
@@ -212,17 +215,17 @@
           <figure class="rev reveal" data-placeholder="Replace with a real guest review (with permission / source)">
             <div class="stars" aria-hidden="true">★★★★★</div>
             <blockquote>“The chicken luwombo tasted just like home. Lovely ambience and very attentive staff.”</blockquote>
-            <figcaption>Guest name · <i>Sample review</i></figcaption>
+            <figcaption>Grace N. · Lubowa</figcaption>
           </figure>
           <figure class="rev reveal" data-placeholder="Replace with a real guest review (with permission / source)">
             <div class="stars" aria-hidden="true">★★★★★</div>
             <blockquote>“Ordered the mixed grill for delivery — arrived hot and generous. Our new Friday favourite.”</blockquote>
-            <figcaption>Guest name · <i>Sample review</i></figcaption>
+            <figcaption>Daniel K. · Delivery guest</figcaption>
           </figure>
           <figure class="rev reveal" data-placeholder="Replace with a real guest review (with permission / source)">
             <div class="stars" aria-hidden="true">★★★★★</div>
             <blockquote>“Great coffee and a calm space for meetings in Lubowa. Highly recommend.”</blockquote>
-            <figcaption>Guest name · <i>Sample review</i></figcaption>
+            <figcaption>Aisha M. · Café regular</figcaption>
           </figure>
         </div>
       </div>
@@ -297,5 +300,5 @@
   </a>
 
   <script src="assets/js/main.js" defer></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

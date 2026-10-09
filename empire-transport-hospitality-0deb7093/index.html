@@ -17,8 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for The Empire Transport &amp; Hospitality. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for The Empire Transport &amp; Hospitality by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="site-header" id="top">
@@ -43,7 +43,8 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-bg" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1696963608883-a7bf6eb66ff4?auto=format&fit=crop&w=2000&q=80" alt="">
+        <img src="assets/img/stock/photo-1696963608883-a7bf6eb66ff4-2000.jpg" alt="">
+        <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/plane-sunset.jpg" aria-hidden="true"><source src="assets/video/plane-sunset.mp4" type="video/mp4"></video>
       </div>
       <div class="wrap hero-grid">
         <div class="hero-copy reveal">
@@ -119,7 +120,7 @@
         </div>
         <div class="svc-grid">
           <article class="svc svc-feature reveal">
-            <img src="https://images.unsplash.com/photo-1737586260315-7861311cd6b9?auto=format&fit=crop&w=1400&q=80" alt="View from an aircraft window of a Uganda Airlines plane on the tarmac" loading="lazy" width="1000" height="700">
+            <img src="assets/img/stock/photo-1737586260315-7861311cd6b9-1400.jpg" alt="View from an aircraft window of a Uganda Airlines plane on the tarmac" loading="lazy" width="1000" height="700">
             <div class="svc-body">
               <span class="svc-no">01</span>
               <h3>Airport pickups</h3>
@@ -153,7 +154,7 @@
     <!-- SPLIT IMAGE -->
     <section class="split">
       <div class="split-img reveal">
-        <img src="https://images.unsplash.com/photo-1616805111996-e39d9a19e35c?auto=format&fit=crop&w=1400&q=80" alt="A driver in a white shirt at the wheel of a car" loading="lazy" width="1000" height="800">
+        <img src="assets/img/stock/photo-1616805111996-e39d9a19e35c-1400.jpg" alt="A driver in a white shirt at the wheel of a car" loading="lazy" width="1000" height="800">
       </div>
       <div class="split-copy reveal">
         <p class="kicker"><span></span>Why Empire</p>
@@ -190,16 +191,16 @@
         <div class="reveal">
           <p class="kicker"><span></span>Guide fares</p>
           <h2>Popular routes</h2>
-          <p class="muted">Indicative one-way fares for a standard car. Your exact quote depends on time, passengers and luggage, and is always confirmed before you travel.</p>
+          <p class="muted">Indicative one-way fares for a standard car, in Ugandan shillings (UGX). Your exact quote depends on time, passengers and luggage, and is always confirmed before you travel. <span data-placeholder="Confirm whether USD quotes/payments are accepted">Visiting from abroad? Ask and we can quote in US dollars too.</span></p>
           <a class="btn btn-gold" href="#book">Get an exact quote</a>
         </div>
         <div class="rate-table reveal" data-placeholder="Confirm route list and guide fares">
-          <div class="rate"><span>Entebbe Airport → Entebbe town</span><b>UGX 50,000</b></div>
-          <div class="rate"><span>Entebbe Airport → Kampala city centre</span><b>UGX 120,000</b></div>
-          <div class="rate"><span>Kampala → Entebbe Airport</span><b>UGX 120,000</b></div>
-          <div class="rate"><span>Town run within Kampala (per trip)</span><b>from UGX 40,000</b></div>
-          <div class="rate"><span>Full day with driver (in town)</span><b>from UGX 250,000</b></div>
-          <div class="rate"><span>Home delivery (Kampala)</span><b>from UGX 15,000</b></div>
+          <div class="rate"><span>Entebbe Airport → Entebbe town</span><b><span class="cur">UGX</span> 50,000</b></div>
+          <div class="rate"><span>Entebbe Airport → Kampala city centre</span><b><span class="cur">UGX</span> 120,000</b></div>
+          <div class="rate"><span>Kampala → Entebbe Airport</span><b><span class="cur">UGX</span> 120,000</b></div>
+          <div class="rate"><span>Town run within Kampala (per trip)</span><b>from <span class="cur">UGX</span> 40,000</b></div>
+          <div class="rate"><span>Full day with driver (in town)</span><b>from <span class="cur">UGX</span> 250,000</b></div>
+          <div class="rate"><span>Home delivery (Kampala)</span><b>from <span class="cur">UGX</span> 15,000</b></div>
         </div>
       </div>
     </section>
@@ -207,10 +208,10 @@
     <!-- GALLERY -->
     <section class="gallery" aria-label="Gallery">
       <div class="gallery-grid">
-        <figure class="reveal"><img src="https://images.unsplash.com/photo-1723563128383-7efb2ee7a50c?auto=format&fit=crop&w=1000&q=75" alt="Aircraft parked on the airport apron under a blue sky" loading="lazy" width="700" height="500"><figcaption>Entebbe arrivals</figcaption></figure>
-        <figure class="reveal"><img src="https://images.unsplash.com/photo-1675756261486-09bd1e0f6c8a?auto=format&fit=crop&w=1000&q=75" alt="Aerial view of Kampala city with green hills and buildings" loading="lazy" width="700" height="500"><figcaption>Kampala town runs</figcaption></figure>
-        <figure class="reveal"><img src="https://images.unsplash.com/photo-1781962479780-b910226837a3?auto=format&fit=crop&w=1000&q=75" alt="An elegant hotel room with large windows overlooking a garden" loading="lazy" width="700" height="500"><figcaption>Hotel recommendations</figcaption></figure>
-        <figure class="reveal"><img src="https://images.unsplash.com/photo-1574202141112-c3a90e1a3ce2?auto=format&fit=crop&w=1000&q=75" alt="A traveller walking with a rolling suitcase at sunset" loading="lazy" width="700" height="500"><figcaption>Door-to-door</figcaption></figure>
+        <figure class="reveal"><img src="assets/img/stock/photo-1696963604975-4fe9a6477a44-1000.jpg" alt="Airliners on the apron at Entebbe International Airport in soft evening light" loading="lazy" width="700" height="500"><figcaption>Entebbe arrivals</figcaption></figure>
+        <figure class="reveal"><img src="assets/img/stock/photo-1675756261486-09bd1e0f6c8a-1000.jpg" alt="Aerial view of Kampala city with green hills and buildings" loading="lazy" width="700" height="500"><figcaption>Kampala town runs</figcaption></figure>
+        <figure class="reveal"><img src="assets/img/stock/photo-1781962479780-b910226837a3-1000.jpg" alt="An elegant hotel room with large windows overlooking a garden" loading="lazy" width="700" height="500"><figcaption>Hotel recommendations</figcaption></figure>
+        <figure class="reveal"><img src="assets/img/stock/photo-1574202141112-c3a90e1a3ce2-1000.jpg" alt="A traveller walking with a rolling suitcase at sunset" loading="lazy" width="700" height="500"><figcaption>Door-to-door</figcaption></figure>
       </div>
     </section>
 
@@ -225,15 +226,15 @@
         <div class="review-grid">
           <blockquote class="review reveal" data-placeholder="Real client review (airport pickup)">
             <p>“My flight landed late at night and he was already waiting at arrivals with my name. Calm, polite and a very comfortable drive.”</p>
-            <footer>Visiting traveller · <em>Sample review</em></footer>
+            <footer>Grace, visiting from London · <em>Sample review</em></footer>
           </blockquote>
           <blockquote class="review reveal" data-placeholder="Real client review (hotel booking)">
             <p>“He recommended a hotel that matched our budget perfectly and handled everything. It felt like having a friend in Kampala.”</p>
-            <footer>Family on holiday · <em>Sample review</em></footer>
+            <footer>The Okellos, family holiday · <em>Sample review</em></footer>
           </blockquote>
           <blockquote class="review reveal" data-placeholder="Real client review (town runs)">
             <p>“I used Empire for a full week of meetings. Never late once, and always kept me updated on WhatsApp.”</p>
-            <footer>Business visitor · <em>Sample review</em></footer>
+            <footer>David, business visitor · <em>Sample review</em></footer>
           </blockquote>
         </div>
       </div>
@@ -294,5 +295,5 @@
   </a>
 
   <script src="assets/js/main.js"></script>
-</body>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

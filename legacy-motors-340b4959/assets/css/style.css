@@ -290,3 +290,10 @@ p { margin: 0 0 1em; }
   .eyebrow { letter-spacing: .12em; gap: .55rem; font-size: .7rem; }
   .eyebrow i { width: 16px; }
 }
+
+/* prices + hero video */
+.car__price { font-family: var(--display); font-weight: 800; font-size: 1.05rem; margin: -.4rem 0 .9rem; color: var(--ink); }
+.cur { font-size: .72em; letter-spacing: .05em; margin-right: .15em; opacity: .8; }
+.cur-note { margin: 1.6rem 0 0; font-size: .85rem; color: var(--muted); }
+video.hero__bg { z-index: -3; }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none; } }

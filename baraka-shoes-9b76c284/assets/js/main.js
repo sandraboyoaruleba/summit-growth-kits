@@ -56,7 +56,9 @@
   // product order buttons -> WhatsApp
   document.querySelectorAll('.p-btn').forEach(function (btn) {
     var name = btn.getAttribute('data-product');
-    btn.href = waLink('Hello Baraka Shoes, I am interested in the ' + name + '. Do you have my size? My size is: ');
+    var priceEl = btn.parentNode.querySelector('.price');
+    var price = priceEl ? ' (' + priceEl.textContent.replace(/\s+/g, ' ').trim() + ')' : '';
+    btn.href = waLink('Hello Baraka Shoes, I am interested in the ' + name + price + '. Do you have my size? My size is: ');
     btn.target = '_blank'; btn.rel = 'noopener';
     btn.setAttribute('aria-label', 'Order ' + name + ' on WhatsApp');
   });

@@ -259,3 +259,13 @@ p{margin:0 0 1em}
   *,*::before,*::after{transition:none!important;animation:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* polish pass: guide prices + valley video */
+.cur{font-size:.78em;letter-spacing:.06em;margin-right:.1em}
+.l-price{margin:.2rem 0 .6rem;font-family:var(--serif);font-size:1.35rem;font-weight:600;color:var(--forest)}
+.l-price span:first-child{display:block;font-family:var(--sans);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.l-price .cur{font-family:var(--sans);font-weight:700;color:var(--brass)}
+.pm-frame{position:relative;overflow:hidden}
+.pm-frame img{display:block}
+.pm-frame .stock-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (prefers-reduced-motion: reduce){ .stock-video{display:none} }

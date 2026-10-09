@@ -260,3 +260,16 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--t
   .site-nav { visibility: hidden; transition: transform .35s ease, visibility 0s linear .35s; }
   .nav-open .site-nav { visibility: visible; transition: transform .35s ease; }
 }
+
+/* Polish pass: currency, video band, map fallback */
+.cur { font-size: .74em; letter-spacing: .04em; opacity: .8; font-weight: 600; }
+.why { position: relative; overflow: hidden; isolation: isolate; }
+.why-video { position: absolute; inset: 0; z-index: -1; background: url("../video/grill-flames.jpg") center / cover; }
+.why-video .stock-video { width: 100%; height: 100%; object-fit: cover; }
+.why-video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(38,24,19,.9), rgba(38,24,19,.78) 50%, rgba(38,24,19,.92)); }
+.why-card { backdrop-filter: blur(3px); }
+.map { position: relative; min-height: 380px; border-radius: var(--radius); overflow: hidden; }
+.map .map-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.map iframe { position: relative; }
+.map-link { position: absolute; left: 1rem; bottom: 1rem; background: var(--tomato); color: #fff !important; padding: .6rem 1rem; border-radius: 999px; font-weight: 700; font-size: .9rem; text-decoration: none; }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none; } }

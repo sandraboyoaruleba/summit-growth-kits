@@ -18,9 +18,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/main.js" defer></script>
-<style id="demo-watermark">html::after{content:'';position:fixed;inset:0;z-index:2147483646;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27360%27%20height%3D%27220%27%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2750%25%27%20text-anchor%3D%27middle%27%20dominant-baseline%3D%27middle%27%20transform%3D%27rotate%28-24%20180%20110%29%27%20font-family%3D%27Arial%2Csans-serif%27%20font-size%3D%2730%27%20font-weight%3D%27700%27%20fill%3D%27rgba%28120%2C120%2C120%2C0.22%29%27%20letter-spacing%3D%274%27%3EDEMO%20PREVIEW%3C/text%3E%3C/svg%3E") repeat}.demo-ribbon{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;padding:9px 14px;background:#111;color:#fff;font:600 13px/1.3 Arial,sans-serif;text-align:center;box-shadow:0 -4px 18px rgba(0,0,0,.25)}.demo-ribbon b{color:#ffcf5a;letter-spacing:.08em}.demo-ribbon{flex-direction:column;gap:3px}.demo-line,.demo-by{display:block}.demo-by{font-weight:400;color:#ddd}.demo-by strong{color:#fff}.demo-by small{display:block;font-size:12px;opacity:.85}body{padding-bottom:64px!important}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
-<body><div class="demo-ribbon" role="note"><span class="demo-line"><b>DEMO</b> Website preview for Solargen Ventures. Placeholder details, not for public use.</span><span class="demo-by">By <strong>Dr. Sandra Boyo-Aruleba</strong><small>Founder &amp; CEO, Momentum Essentials</small></span></div>
+<style id="demo-notice">.demo-notice{position:relative;z-index:2147483647;display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;align-items:center;padding:9px 16px;background:#141414;color:#eee;font:400 13px/1.45 Arial,Helvetica,sans-serif;text-align:center}.demo-notice b{color:#ffcf5a;font-weight:700;letter-spacing:.06em;margin-right:4px}.demo-notice strong{color:#fff}.demo-notice span{display:inline-block}@media print{body *{visibility:hidden!important}body::before{content:'Demo preview: not for use';visibility:visible;position:fixed;top:40%;left:0;right:0;text-align:center;font:700 28px Arial}}</style></head>
+<body><div class="demo-notice" role="note"><span><b>DEMO</b>Website preview for Solargen Ventures by <strong>Dr. Sandra Boyo-Aruleba · Founder &amp; CEO, Momentum Essentials</strong>.</span><span>Some details and photos are samples and will be updated with your real information.</span></div>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -61,7 +60,8 @@
         </div>
         <div class="hero-visual reveal">
           <figure class="panel-img">
-            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80" alt="Rows of solar panels under a bright, cloud-dotted sky" width="1200" height="900" fetchpriority="high">
+            <img class="video-fallback" src="assets/img/stock/photo-1509391366360-2e959784a276-1200.jpg" alt="Rows of solar panels under a bright, cloud-dotted sky" width="1200" height="900" fetchpriority="high">
+            <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/island-grid.jpg" aria-hidden="true"><source src="assets/video/island-grid.mp4" type="video/mp4"></video>
           </figure>
           <div class="stat-card sc-1"><small>Medium-voltage network</small><strong>20.4<span>km</span></strong><em>33 kV lines</em></div>
           <div class="stat-card sc-2"><small>Low-voltage network</small><strong>68.7<span>km</span></strong><em>415/230 V to villages</em></div>
@@ -85,7 +85,7 @@
         </div>
         <div class="svc-grid">
           <article class="svc reveal">
-            <div class="svc-img"><img src="https://images.unsplash.com/photo-1595790527813-6a76c994a1dd?auto=format&fit=crop&w=900&q=80" alt="Homes with iron roofs among green trees under a blue sky" loading="lazy"></div>
+            <div class="svc-img"><img src="assets/img/stock/photo-1595790527813-6a76c994a1dd-900.jpg" alt="Homes with iron roofs among green trees under a blue sky" loading="lazy"></div>
             <div class="svc-body">
               <span class="svc-n">01</span>
               <h3>Residential</h3>
@@ -94,7 +94,7 @@
             </div>
           </article>
           <article class="svc reveal">
-            <div class="svc-img"><img src="https://images.unsplash.com/photo-1777065851469-71aef898a26f?auto=format&fit=crop&w=900&q=80" alt="A busy outdoor market with vendors and shoppers" loading="lazy"></div>
+            <div class="svc-img"><img src="assets/img/stock/photo-1777065851469-71aef898a26f-900.jpg" alt="A busy outdoor market with vendors and shoppers" loading="lazy"></div>
             <div class="svc-body">
               <span class="svc-n">02</span>
               <h3>Commercial</h3>
@@ -103,7 +103,7 @@
             </div>
           </article>
           <article class="svc reveal">
-            <div class="svc-img"><img src="https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?auto=format&fit=crop&w=900&q=80" alt="A technician in gloves installing a solar panel" loading="lazy"></div>
+            <div class="svc-img"><img src="assets/img/stock/photo-1569950044190-6d22b2693955-900.jpg" alt="Sparks flying as a welder cuts steel in a workshop" loading="lazy"></div>
             <div class="svc-body">
               <span class="svc-n">03</span>
               <h3>Industrial</h3>
@@ -123,14 +123,19 @@
           <h2>Turn electricity into income.</h2>
           <p>The more you produce, the more you earn. Solargen power lets island enterprises replace costly generators and fuel, work longer hours and add value to what they sell.</p>
           <a class="btn btn-sun" href="#apply">Book a business site visit</a>
+          <figure class="biz-media">
+            <img class="video-fallback" src="assets/video/panel-install.jpg" alt="Gloved hands fitting a solar panel onto its mounting frame" loading="lazy">
+            <video class="stock-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/panel-install.jpg" aria-hidden="true"><source src="assets/video/panel-install.mp4" type="video/mp4"></video>
+            <figcaption>Every connection is installed and inspected by trained Solargen technicians.</figcaption>
+          </figure>
         </div>
         <ul class="uses reveal">
-          <li><span aria-hidden="true">❄</span><b>Fish cold storage &amp; ice</b><small>Keep the catch fresh and sell at better prices.</small></li>
-          <li><span aria-hidden="true">⚙</span><b>Milling &amp; processing</b><small>Grain mills, juice and feed processing.</small></li>
-          <li><span aria-hidden="true">⚡</span><b>Welding &amp; workshops</b><small>Three-phase power for tools and machinery.</small></li>
-          <li><span aria-hidden="true">✂</span><b>Salons &amp; tailoring</b><small>Clippers, dryers and sewing machines.</small></li>
-          <li><span aria-hidden="true">☕</span><b>Bars, cafés &amp; shops</b><small>Fridges, music and lighting into the night.</small></li>
-          <li><span aria-hidden="true">💧</span><b>Water pumping &amp; irrigation</b><small>Pump water for farms and households.</small></li>
+          <li><img class="use-img" src="assets/img/stock/photo-1751568928453-bf6fee52dead-600.jpg" alt="Fish farming cages floating on Lake Victoria" loading="lazy"><span aria-hidden="true">❄</span><b>Fish cold storage &amp; ice</b><small>Keep the catch fresh and sell at better prices.</small></li>
+          <li><img class="use-img" src="assets/img/stock/photo-1661619106780-875be3b90feb-600.jpg" alt="A heap of harvested maize cobs ready for milling" loading="lazy"><span aria-hidden="true">⚙</span><b>Milling &amp; processing</b><small>Grain mills, juice and feed processing.</small></li>
+          <li><img class="use-img" src="assets/img/stock/photo-1710665572115-90f48a98b570-600.jpg" alt="A welder in a mask joining metal outdoors" loading="lazy"><span aria-hidden="true">⚡</span><b>Welding &amp; workshops</b><small>Three-phase power for tools and machinery.</small></li>
+          <li><img class="use-img" src="assets/img/stock/photo-1675345555585-e3448d825b12-600.jpg" alt="A smiling tailor sitting in her fabric and clothing shop" loading="lazy"><span aria-hidden="true">✂</span><b>Salons &amp; tailoring</b><small>Clippers, dryers and sewing machines.</small></li>
+          <li><img class="use-img" src="assets/img/stock/photo-1715250670775-510b2762a14a-600.jpg" alt="A small village shop with a painted wooden front" loading="lazy"><span aria-hidden="true">☕</span><b>Bars, cafés &amp; shops</b><small>Fridges, music and lighting into the night.</small></li>
+          <li><img class="use-img" src="assets/img/stock/photo-1760873059715-7c7cfbe2a2c6-600.jpg" alt="Children beside a village water pump" loading="lazy"><span aria-hidden="true">💧</span><b>Water pumping &amp; irrigation</b><small>Pump water for farms and households.</small></li>
         </ul>
       </div>
     </section>
@@ -160,7 +165,7 @@
           <li class="reveal">
             <span class="tl-n">2</span>
             <div><h3>Pay inspection</h3><p>Pay the inspection charge when submitting your form.</p>
-              <div class="fees"><div><small>Single phase</small><b>UGX 38,000</b></div><div><small>Three phase</small><b>UGX 80,000</b></div></div>
+              <div class="fees"><div><small>Single phase</small><b><span class="cur">UGX</span> 38,000</b></div><div><small>Three phase</small><b><span class="cur">UGX</span> 80,000</b></div></div>
             </div>
           </li>
           <li class="reveal">
@@ -170,7 +175,7 @@
           <li class="reveal">
             <span class="tl-n">4</span>
             <div><h3>Pay connection fee</h3><p>After a successful inspection, pay the connection fee.</p>
-              <div class="fees"><div><small>No-pole service</small><b>UGX 470,000</b></div><div><small>One-pole service</small><b>UGX 2,800,000</b></div></div>
+              <div class="fees"><div><small>No-pole service</small><b><span class="cur">UGX</span> 470,000</b></div><div><small>One-pole service</small><b><span class="cur">UGX</span> 2,800,000</b></div></div>
             </div>
           </li>
           <li class="reveal">
@@ -178,7 +183,7 @@
             <div><h3>Lights on!</h3><p>Your connection is done once the connection fee is received.</p></div>
           </li>
         </ol>
-        <p class="fineprint reveal">Fees as published by Solargen Ventures. <span data-placeholder="Confirm fees are current">Please confirm current charges with our office before paying.</span> Electricity tariff: <span data-placeholder="Tariff per kWh / unit price">ask our team for the current unit price.</span></p>
+        <p class="fineprint reveal">All fees are in Ugandan shillings (UGX). Fees as published by Solargen Ventures. <span data-placeholder="Confirm fees are current">Please confirm current charges with our office before paying.</span> Electricity tariff: <span data-placeholder="Tariff per kWh / unit price">ask our team for the current unit price.</span></p>
       </div>
     </section>
 
@@ -186,7 +191,7 @@
     <section class="section project" id="project">
       <div class="container proj-grid">
         <div class="proj-media reveal">
-          <img src="https://images.unsplash.com/photo-1751561484224-71ecfb3086d9?auto=format&fit=crop&w=1100&q=80" alt="Fishermen sailing a wooden boat on Lake Victoria" loading="lazy">
+          <img src="assets/img/stock/photo-1751561484224-71ecfb3086d9-1100.jpg" alt="Fishermen sailing a wooden boat on Lake Victoria" loading="lazy">
           <div class="proj-badge"><b>First</b><span>grid electricity for Bussi Island</span></div>
         </div>
         <div class="proj-copy reveal">
@@ -198,7 +203,7 @@
             <div><dt>Technology</dt><dd>Solar PV with battery energy storage</dd></div>
             <div><dt>MV network</dt><dd>20.4 km of 33 kV lines</dd></div>
             <div><dt>LV network</dt><dd>68.7 km of 415/230 V lines</dd></div>
-            <div><dt>Investment</dt><dd>About US$2 million (≈ UGX 7 billion)</dd></div>
+            <div><dt>Investment</dt><dd>About <span class="cur">US$</span> 2 million (≈ <span class="cur">UGX</span> 7 billion)</dd></div>
             <div><dt>Capacity</dt><dd data-placeholder="Plant capacity (reported as 400 kWp / 945 kWh — confirm)">400 kWp solar · 945 kWh storage</dd></div>
           </dl>
         </div>
@@ -241,16 +246,20 @@
           </ul>
           <h3 class="mt">Board of Governors</h3>
           <p class="board">Prof. Ponsiano Ocama (Chairman) · Jacques Masiko · Eng. Asaph Nuwagira · Musasizi Edith · Opiso Julius</p>
+          <figure class="team-photo" data-placeholder="Replace with a real photo of the Solargen team at the Kisaba plant">
+            <img src="assets/img/stock/photo-1726221062287-fda475b85493-900.jpg" alt="A technician in a hard hat and safety vest inspecting a solar array beside power lines" loading="lazy">
+            <figcaption>On the ground: our operations team keeps the plant and network running.</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
     <!-- GALLERY -->
     <section class="gallery" aria-label="Island and energy gallery">
-      <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=900&q=80" alt="A solar array stretching under a deep blue sky" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1690831388855-e3ce39324d0b?auto=format&fit=crop&w=900&q=80" alt="Aerial view of a boat carrying people across dark lake water" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=900&q=80" alt="Solar panels glowing at sunset" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1751568928415-9f0d105633ac?auto=format&fit=crop&w=900&q=80" alt="Sunset over the calm waters of Lake Victoria" loading="lazy">
+      <img src="assets/img/stock/photo-1671917057421-677f9cd99721-900.jpg" alt="Aerial view of an African city street with solar panels on an office rooftop" loading="lazy">
+      <img src="assets/img/stock/photo-1690831388855-e3ce39324d0b-900.jpg" alt="Aerial view of a boat carrying people across dark lake water" loading="lazy">
+      <img src="assets/img/stock/photo-1613665813446-82a78c468a1d-900.jpg" alt="Solar panels glowing at sunset" loading="lazy">
+      <img src="assets/img/stock/photo-1751568928415-9f0d105633ac-900.jpg" alt="Sunset over the calm waters of Lake Victoria" loading="lazy">
     </section>
 
     <!-- TESTIMONIALS -->
@@ -258,9 +267,9 @@
       <div class="container">
         <div class="head reveal"><p class="kicker">Customer voices</p><h2>Life on the grid</h2><p class="note">Sample reviews for this demo, to be replaced with real quotes from Bussi customers.</p></div>
         <div class="quotes">
-          <figure class="reveal" data-placeholder="Real customer testimonial #1"><blockquote>“My shop now stays open until late. The fridge alone has doubled my drink sales.”</blockquote><figcaption>Customer name · Shop owner · Sample review</figcaption></figure>
-          <figure class="reveal" data-placeholder="Real customer testimonial #2"><blockquote>“No more buying fuel for the generator every day. My welding work is steady and cheaper to run.”</blockquote><figcaption>Customer name · Welder · Sample review</figcaption></figure>
-          <figure class="reveal" data-placeholder="Real customer testimonial #3"><blockquote>“The children can read at night and we charge our phones at home. It feels like a new island.”</blockquote><figcaption>Customer name · Resident · Sample review</figcaption></figure>
+          <figure class="reveal" data-placeholder="Real customer testimonial #1"><blockquote>“My shop now stays open until late. The fridge alone has doubled my drink sales.”</blockquote><figcaption>Nakato · Shop owner, Kisaba · Sample review</figcaption></figure>
+          <figure class="reveal" data-placeholder="Real customer testimonial #2"><blockquote>“No more buying fuel for the generator every day. My welding work is steady and cheaper to run.”</blockquote><figcaption>Ssali · Welder, Bussi · Sample review</figcaption></figure>
+          <figure class="reveal" data-placeholder="Real customer testimonial #3"><blockquote>“The children can read at night and we charge our phones at home. It feels like a new island.”</blockquote><figcaption>Auma · Resident, Bussi · Sample review</figcaption></figure>
         </div>
       </div>
     </section>
@@ -327,5 +336,6 @@
   <a class="wa-float" href="https://wa.me/256702960690?text=Hello%20Solargen!" target="_blank" rel="noopener" aria-label="Chat with Solargen on WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
   </a>
-</body>
+<script src="assets/js/main.js" defer></script>
+<script>(function(){var n=document.querySelector('.demo-notice');if(!n)return;var f=[].slice.call(document.querySelectorAll('header,.site-header,.header,nav')).filter(function(e){var c=getComputedStyle(e);return c.position==='fixed'&&parseInt(c.top||0,10)===0});if(!f.length)return;function u(){var t=Math.max(0,n.offsetHeight-window.scrollY);f.forEach(function(e){e.style.top=t+'px'})}u();window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u)})()</script></body>
 </html>

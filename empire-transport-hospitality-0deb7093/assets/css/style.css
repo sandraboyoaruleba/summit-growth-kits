@@ -249,3 +249,9 @@ details p{margin:.7rem 0 0;color:var(--muted)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .reveal{opacity:1;transform:none}
 }
+
+/* polish pass: currency + hero video */
+.cur{font-size:.72em;letter-spacing:.06em;margin-right:.15em;opacity:.8}
+.hero-bg .stock-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
+.hero-bg::after{z-index:1}
+@media (prefers-reduced-motion: reduce){ .stock-video{display:none} }

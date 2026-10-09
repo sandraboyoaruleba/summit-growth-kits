@@ -364,3 +364,27 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--l
   .wa-float { width: 54px; height: 54px; right: 14px; bottom: 14px; }
   .care-bar { font-size: .84rem; }
 }
+
+/* ---- Polish pass: currency, photos, video ---- */
+.cur { font-size: .78em; font-weight: 600; letter-spacing: .04em; font-family: var(--sans); margin-right: .12em; }
+.cur-note { font-size: .88rem; color: var(--muted); margin: -6px 0 22px; }
+.founder-portrait.has-photo { margin: 0; overflow: hidden; background: var(--sky-soft); }
+.founder-portrait.has-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.avatar-photo { width: 64px; height: 64px; overflow: hidden; background: var(--sky-soft); box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--line); }
+.avatar-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
+.member .qual { font-size: .8rem; color: var(--muted); margin: -4px 0 8px; }
+.res { padding: 0 0 24px; overflow: hidden; }
+.res > :not(.res-img) { margin-left: 24px; margin-right: 24px; }
+.res-img { display: block; aspect-ratio: 16 / 10; overflow: hidden; margin-bottom: 4px; }
+.res-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transition: transform .6s; }
+.res:hover .res-img img { transform: scale(1.04); }
+.quote-band.has-video { position: relative; isolation: isolate; overflow: hidden; background: #1d2f3a; padding: clamp(80px, 10vw, 140px) 0; }
+.quote-band.has-video .stock-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.quote-band.has-video::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(20, 34, 43, .62), rgba(20, 34, 43, .72)); }
+.quote-band.has-video p { color: #fdfaf3; text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
+.quote-band.has-video footer { color: #f3e6c8; }
+.quote-band.has-video footer span { color: rgba(253, 250, 243, .75); }
+@media (prefers-reduced-motion: reduce) {
+  .stock-video { display: none; }
+  .quote-band.has-video { background: #1d2f3a url(../video/calm-forest.jpg) center / cover; }
+}

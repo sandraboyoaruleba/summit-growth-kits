@@ -268,3 +268,24 @@ p { margin: 0 0 1em; }
 @media (max-width: 400px) {
   .aura, .impact-grid, .steps { grid-template-columns: 1fr; }
 }
+
+/* fees, currency, video band */
+.cur { font-size: .72em; font-weight: 800; letter-spacing: .05em; margin-right: .15em; }
+.fees { position: relative; margin-top: 2.6rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.fee { background: rgba(247, 243, 236, .06); border: 1px solid rgba(247, 243, 236, .14); border-radius: var(--radius); padding: 1.3rem 1.3rem 1.2rem; display: flex; flex-direction: column; gap: .35rem; }
+.fee-k { font-size: .74rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.fee b { font-family: var(--font-display); font-weight: 400; font-size: 1.7rem; color: var(--ivory); line-height: 1.1; }
+.fee small { color: rgba(247, 243, 236, .65); font-size: .85rem; }
+.fee-note { position: relative; margin-top: 1rem; font-size: .85rem; color: rgba(247, 243, 236, .55); }
+@media (max-width: 980px) { .fees { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .fees { grid-template-columns: 1fr; } }
+.video-band { position: relative; height: clamp(260px, 36vw, 440px); overflow: hidden; background: var(--ink) url("../video/sunrise.jpg") center/cover no-repeat; }
+.video-band .stock-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.video-band__overlay { position: absolute; inset: 0; display: flex; align-items: center; background: linear-gradient(90deg, rgba(20, 22, 31, .85) 0%, rgba(20, 22, 31, .55) 50%, rgba(20, 22, 31, .15) 100%); }
+.video-band__quote { font-family: var(--font-display); font-size: var(--step-3); line-height: 1.05; color: var(--ivory); max-width: 16ch; margin: 0; }
+.video-band__quote em { color: var(--orange-2); }
+@media (prefers-reduced-motion: reduce) { .stock-video { display: none; } }
+.fee .cur { font-family: var(--font-body); font-size: .5em; font-weight: 800; vertical-align: .35em; }
+.fee small .cur { font-size: .8em; vertical-align: 0; }
+.video-band .stock-video { object-position: 50% 88%; }
+.video-band { background-position: 50% 88%; }
